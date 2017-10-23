@@ -3,30 +3,43 @@
 
 {{!-- The main content area - Masonry grid --}}
 <main id="content" class="container" role="main">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="featured">
+    {{#get "posts" filter="featured:true"}}
+        {{#if posts}}
+        <div class="row">
+            <div class="col-md-12">
                 <h3 class="title">Featured</h3>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                        {{#get "posts" filter="featured:true"}}
+                <div class="featured">
+                    <div class="swiper-button-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                    <div class="swiper-button-next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
                             {{#foreach posts}}
                                 <div class="swiper-slide">
-                                    {{> "loop"}}
+                                    {{> "loop-big"}}
                                 </div>
                             {{/foreach}} 
-                        {{/get}}
+                        </div>
                     </div>
                 </div>
+                <ul class="featured-navigation">
+                    {{#foreach posts}}
+                        <li>{{title}}</li>
+                    {{/foreach}} 
+                </ul>
+            </div>
+        </div>
+        {{/if}}
+    {{/get}}
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="title">Recent articles</h3>
+            <div class="loop">
+                {{#get "posts"}}
+                    {{#foreach posts}}
+                        {{> "loop"}}
+                    {{/foreach}} 
+                {{/get}}
             </div>
         </div>
     </div>
 </main>
-
-{{#get "posts" filter="featured:true"}}
-    {{#foreach posts}}
-        {{> "loop"}}
-    {{/foreach}} 
-{{/get}}

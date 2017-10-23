@@ -388,29 +388,8 @@ input::-ms-clear {
     letter-spacing: 3px;
     line-height: 25px;
     text-transform: uppercase;
-}
-
-.swiper-container {
-    width: 100%;
-    height: 100%;
-}
-.swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
+    display: inline-block;
+    margin-top: auto;
 }
 
 h3.title{
@@ -423,23 +402,40 @@ h3.title{
     display: inline-block;
     padding: 5px 16px;
     font-weight: normal;
+    margin-bottom: 15px;
+}
+
+.loop{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .post-card{
     background: #fff;
     position: relative;
-    width: 555px;
+    width: calc(50% - 15px);
     margin-bottom: 30px;
+    display: flex;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,0.08);
 }
 
 .post-card .content{
     display: flex;
+    width: 100%;
 }
 
 .post-card .content .content-holder{
     width: 50%;
-    padding: 25px 25px 0 25px;
+    padding: 25px 25px 10px 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-card.no-image .content .content-holder{
+    width: 100%;
 }
 
 .post-card .img-holder{
@@ -449,12 +445,15 @@ h3.title{
 
 .post-card .img-holder a{
     height: calc(100% - 45px);
+    display: flex;
+    width: 100%;
 }
 
-.post-card .img-holder img{
-    width: 100%;
-    object-fit: cover;
+.post-card .img-holder a span{
+    background-size: cover;
     height: 100%;
+    width: 100%;
+    display: block;
 }
 
 .post-card .content .content-holder h3{
@@ -466,9 +465,153 @@ h3.title{
 
 .post-card .content .content-holder h3 a{
     color: #0000BC;
+    display: block;
 }
 
 .post-card .content .content-holder p{
-    font-size: 14px;    
+    font-size: 14px;
     line-height: 21px;
+    margin: 0 0 20px 0;
+}
+
+.post-card .content .content-holder time{
+    color: #939393;
+    font-size: 11px;
+    letter-spacing: 3px;
+    line-height: 25px;
+    text-transform: uppercase;
+}
+
+.featured{
+    position: relative;
+}
+
+.featured .post-card-big{
+    margin-bottom: 0;
+}
+
+.swiper-wrapper{
+    display: flex;
+}
+
+.swiper-wrapper .swiper-slide{
+    height: auto;
+    display: flex;
+}
+
+.swiper-button-next,
+.swiper-button-prev{
+    background-image: none;
+    width: 38px;
+    height: 38px;
+    position: absolute;
+    top: -13px;
+    right: 0;
+    border: 2px solid #0025C8;
+    color: #0025C8;
+    margin: 0;
+    transform: translateY(-100%);
+    text-align: center;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.swiper-button-prev{
+    right: 51px;
+    left: auto;
+}
+
+.swiper-button-next i{
+    margin-top: -2px;
+    margin-right: -2px;
+}
+
+.swiper-button-prev i{
+    margin-top: -2px;
+    margin-left: -2px;
+}
+
+.post-card-big{
+    width: 100%;
+    text-align: left;
+}
+
+.post-card-big .content .content-holder{
+    padding: 56px 67px 30px 67px;
+}
+
+.post-card-big .content .content-holder h3{
+    font-size: 30px;
+    line-height: 35px;
+    margin: 37px 0 40px;
+}
+
+.post-card-big .content .content-holder p{
+    font-size: 17px;
+    line-height: 25px;
+}
+
+.featured-navigation{
+    list-style-type: none;
+    margin: -5px 0 0 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.featured-navigation li{
+    flex: 1;
+    padding: 20px 63px 20px 0;
+    font-size: 15px;
+    line-height: 19px;
+    color: #0000BC;
+    cursor: pointer;
+    margin-right: 2px;
+    position: relative;
+}
+
+.featured-navigation li:last-child{
+    margin-right: 0;
+}
+
+.featured-navigation li.active{
+    color: #CDCDCD;
+}
+
+.featured-navigation li:before,
+.featured-navigation li:after{
+    content: '';
+    background-color: #0025C8;
+    width: 100%;
+    height: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.featured-navigation li:after{
+    width: 0;
+    background-color: #FF0A00;
+}
+
+.featured-navigation li.active:after{
+    -webkit-animation: fill 5s linear forwards;
+    animation: fill 5s linear forwards;
+}
+
+.featured-navigation li.active:before{
+    opacity: 0;
+}
+
+@-webkit-keyframes fill {
+    0%   { width: 0; }
+    100% { width: 100%; }
+}
+@keyframes fill {
+    0%   { width: 0; }
+    100% { width: 100%; }
 }

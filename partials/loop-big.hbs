@@ -1,10 +1,11 @@
 {{!-- This is the post loop - each post will be output using this markup --}}
-<article class="{{post_class}} post-card {{^if feature_image}}no-image{{/if}}">
+<article class="{{post_class}} post-card post-card-big {{^if feature_image}}no-image{{/if}}">
     <div class="content">
         <div class="content-holder">
+            <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
             <h3 class="post-title"><a href="{{url}}" title="{{title}}">{{title}}</a></h2>
             <p>
-                {{excerpt words="40"}}
+                {{excerpt words="100"}}
             </p>
             <a href="{{url}}" title="{{title}}" class="read-more">Read more</a>
         </div>
