@@ -1,0 +1,9 @@
+{{!-- This is the post loop - each post will be output using this markup --}}
+<article class="{{post_class}} post-card post-card-small">
+    <div class="content">
+        <div class="content-holder">
+            <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+            <h4 class="post-title"><a href="{{url}}" title="{{title}}">{{title}}</a></h4>
+        </div>
+    </div>
+</article>

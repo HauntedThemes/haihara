@@ -3,12 +3,12 @@
 
 {{!-- The main content area - Masonry grid --}}
 <main id="content" class="container" role="main">
-    {{#get "posts" filter="featured:true"}}
+    {{#get "posts" filter="featured:true" limit="4" include="author,tags"}}
         {{#if posts}}
         <div class="row">
             <div class="col-md-12">
                 <h3 class="title">Featured</h3>
-                <div class="featured">
+                <div class="featured-slider">
                     <div class="swiper-button-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
                     <div class="swiper-button-next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
                     <div class="swiper-container">
@@ -30,16 +30,68 @@
         </div>
         {{/if}}
     {{/get}}
+
     <div class="row">
         <div class="col-md-12">
             <h3 class="title">Recent articles</h3>
-            <div class="loop">
-                {{#get "posts"}}
-                    {{#foreach posts}}
-                        {{> "loop"}}
-                    {{/foreach}} 
-                {{/get}}
+            <div class="recent-slider loop">
+                <div class="swiper-button-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                <div class="swiper-button-next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        {{#get "posts" limit="4" filter="featured:false"}}
+                            {{#foreach posts}}
+                                <div class="swiper-slide">
+                                    {{> "loop"}}
+                                </div>
+                            {{/foreach}} 
+                        {{/get}}
+                        {{#get "posts" limit="4" page="2" filter="featured:false"}}
+                            {{#foreach posts}}
+                                <div class="swiper-slide">
+                                    {{> "loop"}}
+                                </div>
+                            {{/foreach}} 
+                        {{/get}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            {{#get "tags" limit="all"}}
+                {{#foreach tags}}
+                    <h3 class="title">{{name}}</h3>
+                    <a href="/tag/{{slug}}" class="view-all">View all</a>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{#get "posts" limit="1" filter="tag:{{slug}}"}}
+                                {{#foreach posts}}
+                                    {{> "loop-big"}}
+                                {{/foreach}}
+                            {{/get}}
+                        </div>
+                    </div>
+                    {{#get "posts" limit="6" filter="tag:{{slug}}"}}
+                        <div class="row loop-small">
+                            {{#foreach posts}}
+                                <div class="col-md-4">
+                                    {{> "loop-small"}}
+                                </div>
+                            {{/foreach}}
+                        </div>
+                    {{/get}}
+                {{/foreach}}
+            {{/get}}
+        </div>
+        <div class="col-md-4">
+            <div class="widget latest-comments">
+                <h3>Latest comments</h3>
+                <script type="text/javascript" src="http://hauntedthemes-demo.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=1&excerpt_length=100"></script>
+            </div>
+        </div>
+    </div>
+
 </main>

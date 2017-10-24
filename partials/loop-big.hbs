@@ -3,7 +3,7 @@
     <div class="content">
         <div class="content-holder">
             <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
-            <h3 class="post-title"><a href="{{url}}" title="{{title}}">{{title}}</a></h2>
+            <h2 class="post-title"><a href="{{url}}" title="{{title}}">{{title}}</a></h2>
             <p>
                 {{excerpt words="100"}}
             </p>
@@ -14,7 +14,23 @@
             <a href="{{url}}" title="{{title}}">
                 <span style="background-image: url({{img_url feature_image}})"></span>
             </a>
+            {{/if}}
+            {{#if tags}}
+                <ul class="tags">
+                {{#foreach tags}}
+                    <li>
+                        <a href="{{url}}" title="{{name}}" class="tag tag-{{id}} {{slug}}">{{name}}</a>
+                    </li>  
+                {{/foreach}}
+                </ul>
         </div>
         {{/if}}
     </div>
+    {{#author}}
+        {{#if profile_image}}
+            <figure class="author-image">
+                <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
+            </figure>
+        {{/if}}
+    {{/author}}
 </article>
