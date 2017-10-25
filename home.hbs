@@ -65,9 +65,9 @@
                 {{#foreach tags}}
                     <h3 class="title">{{name}}</h3>
                     <a href="/tag/{{slug}}" class="view-all">View all</a>
-                    <div class="row">
+                    <div class="row loop-big">
                         <div class="col-md-12">
-                            {{#get "posts" limit="1" filter="tag:{{slug}}"}}
+                            {{#get "posts" limit="1" include="author,tags" filter="tag:{{slug}}"}}
                                 {{#foreach posts}}
                                     {{> "loop-big"}}
                                 {{/foreach}}
@@ -90,6 +90,33 @@
             <div class="widget latest-comments">
                 <h3>Latest comments</h3>
                 <script type="text/javascript" src="http://hauntedthemes-demo.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=1&excerpt_length=100"></script>
+            </div>
+            <div class="widget popular-threads">
+                <h3>Popular threads</h3>
+                <script type="text/javascript" src="http://hauntedthemes-demo.disqus.com/popular_threads_widget.js"></script>
+            </div>
+            <div class="widget most-viewed">
+                <h3>Most viewed</h3>
+                <ul></ul>
+            </div>
+            <div class="widget top-authors">
+                <h3>Top authors</h3>
+                {{#get "users" limit="6" include="count.posts" order="count.posts desc"}}
+                    <ul>
+                        {{#foreach users}}
+                            <li>
+                                {{#if profile_image}}
+                                <figure class="author-image">
+                                    <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
+                                </figure>
+                                {{else}}
+                                <a class="no-img" href="{{url}}" title="{{name}}"></a>
+                                {{/if}}
+                                <a href="/tag/{{slug}}" class="link">{{name}}</a>
+                            </li>
+                        {{/foreach}}
+                    </ul>
+                {{/get}}
             </div>
         </div>
     </div>

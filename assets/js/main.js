@@ -240,4 +240,141 @@ jQuery(document).ready(function($) {
     //   });
     // });
 
+      // Replace with your client ID from the developer console.
+  // var CLIENT_ID = '426633516596-6upbjtvbdqvbd8gl2ahee0eof8au5e6c.apps.googleusercontent.com';
+
+  // // Set authorized scope.
+  // var SCOPES = ['https://www.googleapis.com/auth/analytics.readonly'];
+
+
+  // function authorize(event) {
+  //   // Handles the authorization flow.
+  //   // `immediate` should be false when invoked from the button click.
+  //   var authData = {
+  //     client_id: CLIENT_ID,
+  //     scope: SCOPES,
+  //     immediate: false
+  //   };
+
+  //   gapi.auth.authorize(authData, function(response) {
+  //     console.log(response);
+  //   });
+  // }
+
+  // authorize();
+
+  // function queryAccounts() {
+  //     // Load the Google Analytics client library.
+  //     gapi.client.load('analytics', 'v3').then(function() {
+
+  //       // Get a list of all Google Analytics accounts for this user
+  //       gapi.client.analytics.management.accounts.list().then(handleAccounts);
+  //     });
+  //   }
+
+  //   (function( gapi ) {
+  //       gapi.client.setApiKey(apiKey); // your variable for apiKey
+  //       window.setTimeout(checkAuth,1);
+
+  //       function checkAuth() {
+  //           gapi.auth.authorize({client_id: clientID, scope: scopes, immediate: true},   handleAuthResult);
+  //       }
+
+  //       function handleAuthResult(authResult) {
+  //           var authorizeButton = document.getElementById('id-of-your-login-button');
+  //           if (authResult && !authResult.error) {
+  //               authorizeButton.style.visibility = 'hidden';
+  //               makeApiCall();
+  //           } else {
+  //               authorizeButton.style.visibility = '';
+  //               authorizeButton.onclick = handleAuthClick;
+  //           }
+  //       }
+
+  //     function handleAuthClick(event) {
+  //         gapi.auth.authorize({
+  //             client_id: clientID,
+  //             scope: scopes,
+  //             response_type: 'code token id_token gsession',
+  //             access_type: accessType,
+  //             immediate: false
+  //         }, handleAuthResult);
+  //         return false;
+  //      }
+  //    })( gapi );    
+
+
+    var CLIENT_ID = '426633516596-6upbjtvbdqvbd8gl2ahee0eof8au5e6c.apps.googleusercontent.com';
+    var API_KEY = 'v1';
+    var SCOPES = 'https://www.googleapis.com/auth/analytics.readonly';
+    var filter = '';
+    var exclude = [
+        '/p/', 
+        '/author/',
+        '/tag/',
+        '(not set)',
+    ];
+
+    $.each(exclude, function(index, val) {
+        filter += 'ga:landingPagePath!@'+ val +';';
+    });
+
+    filter += 'ga:landingPagePath!=/';
+
+    /**
+    * Authorize Google Compute Engine API.
+    */
+    function authorization() {
+    gapi.client.setApiKey(API_KEY);
+    gapi.auth.authorize({
+     client_id: CLIENT_ID,
+     scope: SCOPES,
+     immediate: true
+    }, function(authResult) {
+        if (authResult && !authResult.error) {
+          var apiQuery = gapi.client.analytics.data.ga.get({
+            'ids': 'ga:160750085',
+            'start-date': '30daysAgo',
+            'end-date': 'yesterday',
+            'metrics': 'ga:entrances',
+            'dimensions': 'ga:landingPagePath',
+            'sort': '-ga:entrances',
+            'filters'    : filter,
+            'max-results': 20
+          });
+          apiQuery.execute(handleCoreReportingResults);
+        } else {
+          console.log('Auth was not successful');
+        }
+      }
+    );
+    }
+
+    function handleCoreReportingResults(results) {
+      if (!results.error) {
+        var check = 0;
+        $.each(results.rows, function(index, val) {
+            var slug = val[0].substring(1).slice(0,-1);
+            slug = slug.replace(/\\/g, '');
+            $.get(ghost.url.api('posts'), {filter:"page:false+slug:"+slug}).done(function (data){
+                if (data.posts[0] && check < 5) {
+                    var viewText = 'views';
+                    if (val[1] == 1) { viewText = 'view'; };
+                    $('.most-viewed ul').append('<li><p class="views">'+ val[1] + ' ' + viewText + ' </p><a href="' + val[0] + '">' + data.posts[0].title + '</a></li>');
+                    check++;
+                };
+            }).fail(function (err){
+              console.log(err);
+            });
+        });
+      } else {
+        alert('There was an error: ' + results.message);
+      }
+    }
+
+    /**
+    * Driver for sample application.
+    */
+    $(window).load(authorization);
+
 });
