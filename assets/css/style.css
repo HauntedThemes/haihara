@@ -309,7 +309,6 @@ textarea{
 }
 
 input{
-    border-radius: 2px;
     background-color: #CCCCCC;
     width: 100%;
     max-width: 475px;
@@ -381,6 +380,192 @@ input::-ms-clear {
 /* ==========================================================================
    2. Header
    ========================================================================== */
+
+.main-container{
+    overflow: hidden;
+}
+
+header{
+    margin-bottom: 100px;
+    position: relative;
+}
+
+header .blog-logo{
+    color: #0000BC;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 90px;
+    display: inline-block;
+    font-family: "dienstag", sans-serif;
+    margin-left: 30px;
+}
+
+header .blog-logo:hover{
+    color: #FB0007;
+}
+
+header .blog-logo img{
+    max-width: 200px;
+    height: auto;
+    display: block;
+    max-height: 90px;
+}
+
+header .search-trigger{
+    width: 90px;
+    height: 90px;
+    display: inline-block;
+    text-align: center;
+    line-height: 90px;
+    color: #0025C8;
+    font-size: 22px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+}
+
+header .search{
+    margin-right: 90px;
+    position: relative;
+    z-index: 9998;
+}
+
+header .search #search-field{
+    background: #fff;
+    height: 90px;
+    font-size: 17px;
+    line-height: 25px;
+    color: #2F2F2F;
+    padding: 20px 40px;
+    width: 90px;
+    outline: 0;
+    width: 100%;
+    transform: translateX(100%);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+header .search.active #search-field{
+    transform: translateX(0%);
+}
+
+header .nav-trigger{
+    width: 90px;
+    height: 90px;
+    display: inline-block;
+    text-align: center;
+    line-height: 90px;
+    color: #fff;
+    background: #0025C8;
+    font-size: 25px;
+    vertical-align: top;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+header .nav-trigger i{
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+header .nav-trigger .fa-bars,
+header .menu-container.active .nav-trigger .fa-times{
+    opacity: 1;
+}
+
+header .menu-container.active .nav-trigger .fa-bars,
+header .nav-trigger .fa-times{
+    opacity: 0;
+}
+
+header .nopadding{
+    padding: 0;
+}
+
+header .menu-container{
+    background-color: #0025C8;
+    width: 380px;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: center;
+    z-index: 9999;
+    max-height: 100vh;
+    transform: translate3d(calc(100% - 90px), calc(-100% + 90px), 0);
+    -webkit-transition: transform 0.3s ease-in-out;
+    -moz-transition: transform 0.3s ease-in-out;
+    -o-transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+}
+
+header .menu-container.active{
+    transform: translate3d(0, 0, 0);
+}
+
+header .menu-container .menu-content{
+    overflow: auto;
+    max-height: 100vh;
+    padding: 90px 0;
+}
+
+header .menu-container ul{
+    list-style-type: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+header .menu-container ul li{
+    margin: 10px 0;
+}
+
+header .menu-container ul li a{
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 18px;
+    padding: 10px 0;
+    display: inline-block;
+}
+
+header .menu-container .social{
+    padding: 30px 0;
+}
+
+header .menu-container .social a{
+    color: #fff;
+    font-size: 20px;
+    padding: 5px;
+    margin: 0 5px;
+}
+
+header .search-results{
+    position: absolute;
+    top: 91px;
+    z-index: 9992;
+    left: 0;
+    background: white;
+    width: calc(100% - 90px);
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    padding-left: 90px;
+}
 
 .read-more{
     color: #FB0007;
@@ -768,6 +953,7 @@ h3.title{
 
 .loop-small{
     padding-left: 67px;
+    margin-bottom: 60px;
 }
 
 .loop-big .post-card-big .content .content-holder p{
@@ -784,6 +970,10 @@ h3.title{
 .loop-big .post-card .content .content-holder{
     width: 60%;
     padding-top: 32px;
+}
+
+.loop-big .post-card.no-image .content .content-holder{
+    width: 100%;
 }
 
 .loop-big  .post-card .img-holder{
@@ -976,4 +1166,24 @@ h3.title{
 
 .top-authors.widget ul li a.link{
     margin-top: 7px;
+}
+
+.backdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9000;
+    background: rgba(0,0,0,0.2);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.backdrop.active{
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
 }

@@ -206,103 +206,64 @@ jQuery(document).ready(function($) {
         })();
     };
 
-    // var timeagoInstance = timeago();
+    $('.nav-trigger').on('click', function(event) {
+        event.preventDefault();
+        if ($('.menu-container').hasClass('active')) {
+            $('.menu-container').removeClass('active');
+            $('.backdrop').removeClass('active');
+        }else{
+            $('.menu-container').addClass('active');
+            $('.backdrop').addClass('active');
+        }
+    });
 
-    // var DisqusRecent = {
-    //   init: function( config ) {
-    //     this.api_key     = config.api_key;
-    //     this.forum       = config.forum;
+    $('.search-trigger').on('click', function(event) {
+        event.preventDefault();
+        if ($('.search').hasClass('active')) {
+            $('.search').removeClass('active');
+            $('.backdrop').removeClass('active');
+        }else{
+            $('.search').addClass('active');
+            $('.backdrop').addClass('active');
+            $('.search #search-field').focus();
+        }
+    });
 
-    //     this.fetchRecentComments();
-    //   },
+    $('.backdrop').on('click', function(event) {
+        event.preventDefault();
+        $('.backdrop').toggleClass('active');
+        if ($('.menu-container').hasClass('active')) {
+            $('.menu-container').removeClass('active');
+        }else if($('.search').hasClass('active')) {
+            $('.search').removeClass('active');
+        };
+    });
 
-    //   fetchRecentComments: function() {
-    //     $.ajax({
-    //       url: "https://disqus.com/api/3.0/forums/listPosts.jsonp?forum="+this.forum+"&related=thread&api_key="+this.api_key,
-    //       dataType: "jsonp",
-    //       context: this,
-
-    //       success: function(results) {
-    //         $.each(results.response, function(index, val) {
-    //             var date = val.createdAt;
-    //             console.log(date);
-    //             console.log(timeagoInstance.format(date));
-    //         });
-    //       }
-    //     });
-    //   }
-    // }
-
-    // $(function() {
-    //   DisqusRecent.init({
-    //     api_key:     'dhaJKRgBq7PWT1Ir4EISulTqsajfHyIpozGc4zRHMdyn5dQqioyn8giN96jfISlJ',
-    //     forum:       'hauntedthemes-demo',
-    //   });
-    // });
-
-      // Replace with your client ID from the developer console.
-  // var CLIENT_ID = '426633516596-6upbjtvbdqvbd8gl2ahee0eof8au5e6c.apps.googleusercontent.com';
-
-  // // Set authorized scope.
-  // var SCOPES = ['https://www.googleapis.com/auth/analytics.readonly'];
-
-
-  // function authorize(event) {
-  //   // Handles the authorization flow.
-  //   // `immediate` should be false when invoked from the button click.
-  //   var authData = {
-  //     client_id: CLIENT_ID,
-  //     scope: SCOPES,
-  //     immediate: false
-  //   };
-
-  //   gapi.auth.authorize(authData, function(response) {
-  //     console.log(response);
-  //   });
-  // }
-
-  // authorize();
-
-  // function queryAccounts() {
-  //     // Load the Google Analytics client library.
-  //     gapi.client.load('analytics', 'v3').then(function() {
-
-  //       // Get a list of all Google Analytics accounts for this user
-  //       gapi.client.analytics.management.accounts.list().then(handleAccounts);
-  //     });
-  //   }
-
-  //   (function( gapi ) {
-  //       gapi.client.setApiKey(apiKey); // your variable for apiKey
-  //       window.setTimeout(checkAuth,1);
-
-  //       function checkAuth() {
-  //           gapi.auth.authorize({client_id: clientID, scope: scopes, immediate: true},   handleAuthResult);
-  //       }
-
-  //       function handleAuthResult(authResult) {
-  //           var authorizeButton = document.getElementById('id-of-your-login-button');
-  //           if (authResult && !authResult.error) {
-  //               authorizeButton.style.visibility = 'hidden';
-  //               makeApiCall();
-  //           } else {
-  //               authorizeButton.style.visibility = '';
-  //               authorizeButton.onclick = handleAuthClick;
-  //           }
-  //       }
-
-  //     function handleAuthClick(event) {
-  //         gapi.auth.authorize({
-  //             client_id: clientID,
-  //             scope: scopes,
-  //             response_type: 'code token id_token gsession',
-  //             access_type: accessType,
-  //             immediate: false
-  //         }, handleAuthResult);
-  //         return false;
-  //      }
-  //    })( gapi );    
-
+    // Initialize ghostHunter - A Ghost blog search engine
+    $("#search-field").ghostHunter({
+        results             : "#results",
+        onKeyUp             : true,
+        zeroResultsInfo     : true,
+        displaySearchInfo   : true,
+        info_template       : "<p>No posts found</p>",
+        result_template     : "<li class='col-md-3'>{{pubDate}}<a href='{{link}}' title='{{title}}'>{{title}}</a></li>",
+        onComplete      : function( results ){
+            // if (results.length == 0 && $('#search-field').val() != '') {
+            //     $('#results p').addClass('empty');
+            // };
+            // if ($('.search-inner').find('a').length) {
+            //     $('.search-inner a').each(function(index, el) {
+            //         var a = $(this);
+            //         a.html(a.html().replace(/^(\w+)/, '<span>$1</span>'));
+            //     });
+            // };
+            // $('#results li').each(function(index, el) {
+            //     if (index > 11) {
+            //         $(this).hide();
+            //     };
+            // });
+        }
+    });
 
     var CLIENT_ID = '426633516596-6upbjtvbdqvbd8gl2ahee0eof8au5e6c.apps.googleusercontent.com';
     var API_KEY = 'v1';

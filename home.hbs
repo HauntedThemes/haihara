@@ -74,12 +74,14 @@
                             {{/get}}
                         </div>
                     </div>
-                    {{#get "posts" limit="6" filter="tag:{{slug}}"}}
+                    {{#get "posts" limit="7" filter="tag:{{slug}}"}}
                         <div class="row loop-small">
                             {{#foreach posts}}
+                                {{^if @first}}
                                 <div class="col-md-4">
                                     {{> "loop-small"}}
                                 </div>
+                                {{/if}}
                             {{/foreach}}
                         </div>
                     {{/get}}
