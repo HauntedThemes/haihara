@@ -2,27 +2,49 @@
 
     <footer class="site-footer clearfix">
         <div class="container">
-            <div class="container-footer">
-                <div class="tags-col">
-                    <h3>Tags</h3>
-                    {{#get "tags" limit="all"}}
-                        <ul class="tags">
-                            {{#foreach tags}}
-                                <li>
-                                    <a href="{{url}}">{{name}}</a>
-                                </li>
-                            {{/foreach}}
-                        </ul>
-                    {{/get}}
-                </div>
-                <div class="newsletter-col">
-                    <h3>Newsletter</h3>
-                    {{subscribe_form
-                        form_class="gh-signin"
-                        input_class="gh-input"
-                        button_class="btn"
-                        placeholder="Your email address"
-                    }}
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="tags-tab" data-toggle="tab" href="#tags" role="tab" aria-controls="tags" aria-selected="true">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="newsletter-tab" data-toggle="tab" href="#newsletter" role="tab" aria-controls="newsletter" aria-selected="false">Profile</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="tags" role="tabpanel" aria-labelledby="tags-tab">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {{#get "tags" limit="all"}}
+                                            <ul class="tags">
+                                                {{#foreach tags}}
+                                                    <li>
+                                                        <a href="{{url}}">{{name}}</a>
+                                                    </li>
+                                                {{/foreach}}
+                                            </ul>
+                                        {{/get}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="newsletter" role="tabpanel" aria-labelledby="newsletter-tab">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {{subscribe_form
+                                            form_class="gh-signin"
+                                            input_class="gh-input"
+                                            button_class="btn"
+                                            placeholder="Your email address"
+                                        }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="social">

@@ -4,75 +4,58 @@
 {{!-- Everything inside the #post tags pulls data from the post --}}
 {{#post}}
 
-    <main id="content" class="container content-inner" role="main" data-id="{{comment_id}}">
+    <main id="content" role="main" data-id="{{comment_id}}">
         <article class="{{post_class}}">
-            <div class="post-meta {{#if feature_image}}has-image{{/if}}">
-                {{#if tags}}
-                    <ul class="tags">
-                    {{#foreach tags limit="5"}}
-                        <li>
-                            <a href="{{url}}" title="{{name}}" class="tag tag-{{id}} {{slug}}">{{name}}</a>
-                        </li>  
-                    {{/foreach}}
-                    </ul>
-                {{/if}}
-                {{#if feature_image}}
-                    <img src="{{img_url feature_image}}" alt="{{title}}">
-                {{/if}}
-                <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
-            </div>
-            <section class="post-content">
 
-                <h1 class="post-title">{{title}}</h1>
-
-                {{content}}
-
-                {{!-- Everything inside the #author tags pulls data from the author --}}
-                {{#author}}
-                    <section class="author">
-                        {{#if profile_image}}
-                        <figure class="author-image">
-                            <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
-                        </figure>
-                        {{/if}}
-
-                        <div class="author-content">
-                            <h4>
-                                <a href="{{url}}">{{name}}</a>
-                                <span class="social">
-                                    {{#if twitter}}<a href="{{twitter_url}}" class="twitter" title="{{twitter}}" target="_blank"></a>{{/if}}
-                                    {{#if facebook}}<a href="{{facebook_url}}" class="facebook" title="{{facebook}}" target="_blank"></a>{{/if}}
-                                </span>
-                            </h4>
-
-                            {{#if bio}}
-                                <p>{{bio}}</p>
-                            {{else}}
-                                <p>Read <a href="{{url}}">more posts</a> by this author.</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="post-cover post-meta {{#if feature_image}}has-image{{/if}}" {{#if feature_image}} style="background-image: url({{img_url feature_image}});"{{/if}}>
+                            <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+                            <h1 class="post-title">{{title}}</h1>
+                            <div class="tags-container">
+                            {{#if tags}}
+                                <ul class="tags">
+                                {{#foreach tags limit="5"}}
+                                    <li>
+                                        <a href="{{url}}" title="{{name}}" class="tag tag-{{id}} {{slug}}">{{name}}</a>
+                                    </li>  
+                                {{/foreach}}
+                                </ul>
                             {{/if}}
-                            <div class="author-meta">
-                                {{#if website}}<span class="author-link"><a href="{{website}}" target="_blank" rel="noopener noreferrer">{{website}}</a></span>{{/if}}
-                                {{#if location}}<span class="author-location">{{location}}</span>{{/if}}
                             </div>
                         </div>
-                    </section>
-                {{/author}}
-
-                <div class="info-bar">
-                    <h4>{{title}}</h4>
-                    <div class="social">
-                        <a class="twitter" href="https://twitter.com/intent/tweet/?text={{title}}&url={{@blog.url}}{{url}}" target="_blank" title="Share on Twitter"></a>
-                        <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{@blog.url}}{{url}}" target="_blank" title="Share on Facebook"></a>
                     </div>
-                    <div class="progress"></div>
                 </div>
-
-            </section>
-
-            <div class="comments">
-                <a href="#" class="comments-trigger"></a>
             </div>
 
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+
+                        <section class="post-content">
+
+                            {{content}}
+
+                            <div class="info-bar">
+                                <h4>{{title}}</h4>
+                                <div class="social">
+                                    <a class="twitter" href="https://twitter.com/intent/tweet/?text={{title}}&url={{@blog.url}}{{url}}" target="_blank" title="Share on Twitter"></a>
+                                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{@blog.url}}{{url}}" target="_blank" title="Share on Facebook"></a>
+                                </div>
+                                <div class="progress"></div>
+                            </div>
+
+                        </section>
+
+                        <div class="comments">
+                            <a href="#" class="comments-trigger"></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        {{> "sidebar"}}
+                    </div>
+                </div>
         </article>
     </main>
     

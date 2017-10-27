@@ -21,7 +21,7 @@ jQuery(document).ready(function($) {
                 nextEl: '.featured-slider .swiper-button-next',
                 prevEl: '.featured-slider .swiper-button-prev',
             },
-            spaceBetween: 30,
+            spaceBetween: 100,
             // autoplay: {
             //     delay: 5000,
             //     disableOnInteraction: false
@@ -61,6 +61,7 @@ jQuery(document).ready(function($) {
             spaceBetween: 30,
             slidesPerView: 2,
             slidesPerColumn: 2,
+            slidesPerGroup: 2,
         });
         swiperRecent.on('reachEnd', function(event) {
 
@@ -221,6 +222,7 @@ jQuery(document).ready(function($) {
         event.preventDefault();
         if ($('.search').hasClass('active')) {
             $('.search').removeClass('active');
+            $('.search-results').removeClass('active');
             $('.backdrop').removeClass('active');
         }else{
             $('.search').addClass('active');
@@ -236,6 +238,7 @@ jQuery(document).ready(function($) {
             $('.menu-container').removeClass('active');
         }else if($('.search').hasClass('active')) {
             $('.search').removeClass('active');
+            $('.search-results').removeClass('active');
         };
     });
 
@@ -244,24 +247,62 @@ jQuery(document).ready(function($) {
         results             : "#results",
         onKeyUp             : true,
         zeroResultsInfo     : true,
-        displaySearchInfo   : true,
-        info_template       : "<p>No posts found</p>",
-        result_template     : "<li class='col-md-3'>{{pubDate}}<a href='{{link}}' title='{{title}}'>{{title}}</a></li>",
+        displaySearchInfo   : false,
+        info_template       : "<h3 class='title'>Number of posts found: {{amount}}</h3>",
+        result_template     : "<li class='swiper-slide'><article class='post post-card post-card-small'><div class='content'><div class='content-holder'><time class='post-date' datetime='{{pubDate}}'>{{pubDate}}</time><h3 class='post-title'><a href='{{link}}' title='{{title}}'>{{title}}</a></h3></div></div></article></li>",
         onComplete      : function( results ){
-            // if (results.length == 0 && $('#search-field').val() != '') {
-            //     $('#results p').addClass('empty');
-            // };
-            // if ($('.search-inner').find('a').length) {
-            //     $('.search-inner a').each(function(index, el) {
-            //         var a = $(this);
-            //         a.html(a.html().replace(/^(\w+)/, '<span>$1</span>'));
-            //     });
-            // };
-            // $('#results li').each(function(index, el) {
-            //     if (index > 11) {
-            //         $(this).hide();
-            //     };
-            // });
+
+            if ($("#search-field").val() == '') {
+                $('.search-results').removeClass('active');
+            }else{
+                $('.search-results').addClass('active');
+                $('.search-results .title:not(.active)').prependTo('.search-slider').addClass('active');
+                console.log($("#search-field").val());
+
+                var resultsCount = $('#results li').length;
+                var slidesPerView = 5;
+                var slidesPerColumn = 3;
+
+                if (resultsCount <= 15) {
+                    slidesPerView = resultsCount / 5;
+                };
+                console.log(resultsCount);
+                if (resultsCount == 0) {
+                    $('<h3 class="title no-posts-found">No posts found</h3>').appendTo('#results');
+                }else{
+                    $('.no-posts-found').remove();
+                };
+
+                // var swiperFeatured = new Swiper('.search-slider .swiper-container', {
+                //     navigation: {
+                //         nextEl: '.search-slider .swiper-button-next',
+                //         prevEl: '.search-slider .swiper-button-prev',
+                //     },
+                //     slidesPerView: 3,
+                //     slidesPerColumn: 3,
+                //     slidesPerGroup: 3,
+                //     spaceBetween: 30,
+                //     pagination: {
+                //         clickable: true,
+                //         el: '.search-slider .swiper-pagination',
+                //     },
+                // });
+                // if (results.length == 0 && $('#search-field').val() != '') {
+                //     $('#results p').addClass('empty');
+                // };
+                // if ($('.search-inner').find('a').length) {
+                //     $('.search-inner a').each(function(index, el) {
+                //         var a = $(this);
+                //         a.html(a.html().replace(/^(\w+)/, '<span>$1</span>'));
+                //     });
+                // };
+                $('#results li').each(function(index, el) {
+                    if (index > 14) {
+                        $(this).hide();
+                    };
+                });
+            };
+
         }
     });
 
