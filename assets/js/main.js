@@ -306,77 +306,107 @@ jQuery(document).ready(function($) {
         }
     });
 
-    var CLIENT_ID = '426633516596-6upbjtvbdqvbd8gl2ahee0eof8au5e6c.apps.googleusercontent.com';
-    var API_KEY = 'v1';
-    var SCOPES = 'https://www.googleapis.com/auth/analytics.readonly';
-    var filter = '';
-    var exclude = [
-        '/p/', 
-        '/author/',
-        '/tag/',
-        '(not set)',
-    ];
+    // var CLIENT_ID = '426633516596-6upbjtvbdqvbd8gl2ahee0eof8au5e6c.apps.googleusercontent.com';
+    // var API_KEY = 'v1';
+    // var SCOPES = 'https://www.googleapis.com/auth/analytics.readonly';
+    // var filter = '';
+    // var exclude = [
+    //     '/p/', 
+    //     '/author/',
+    //     '/tag/',
+    //     '(not set)',
+    // ];
 
-    $.each(exclude, function(index, val) {
-        filter += 'ga:landingPagePath!@'+ val +';';
+    // $.each(exclude, function(index, val) {
+    //     filter += 'ga:landingPagePath!@'+ val +';';
+    // });
+
+    // filter += 'ga:landingPagePath!=/';
+
+    // /**
+    // * Authorize Google Compute Engine API.
+    // */
+    // function authorization() {
+    // gapi.client.setApiKey(API_KEY);
+    // gapi.auth.authorize({
+    //  client_id: CLIENT_ID,
+    //  scope: SCOPES,
+    //  immediate: true
+    // }, function(authResult) {
+    //     if (authResult && !authResult.error) {
+    //       var apiQuery = gapi.client.analytics.data.ga.get({
+    //         'ids': 'ga:160750085',
+    //         'start-date': '30daysAgo',
+    //         'end-date': 'yesterday',
+    //         'metrics': 'ga:entrances',
+    //         'dimensions': 'ga:landingPagePath',
+    //         'sort': '-ga:entrances',
+    //         'filters'    : filter,
+    //         'max-results': 20
+    //       });
+    //       apiQuery.execute(handleCoreReportingResults);
+    //     } else {
+    //       console.log('Auth was not successful');
+    //     }
+    //   }
+    // );
+    // }
+
+    // function handleCoreReportingResults(results) {
+    //   if (!results.error) {
+    //     var check = 0;
+    //     $.each(results.rows, function(index, val) {
+    //         var slug = val[0].substring(1).slice(0,-1);
+    //         slug = slug.replace(/\\/g, '');
+    //         $.get(ghost.url.api('posts'), {filter:"page:false+slug:"+slug}).done(function (data){
+    //             if (data.posts[0] && check < 5) {
+    //                 var viewText = 'views';
+    //                 if (val[1] == 1) { viewText = 'view'; };
+    //                 $('.most-viewed ul').append('<li><p class="views">'+ val[1] + ' ' + viewText + ' </p><a href="' + val[0] + '">' + data.posts[0].title + '</a></li>');
+    //                 check++;
+    //             };
+    //         }).fail(function (err){
+    //           console.log(err);
+    //         });
+    //     });
+    //   } else {
+    //     alert('There was an error: ' + results.message);
+    //   }
+    // }
+
+    // /**
+    // * Driver for sample application.
+    // */
+    // $(window).load(authorization);
+
+    // Progress bar for inner post
+    function progressBar(){
+        var postContentOffsetTop = $('.post-content').offset().top;
+        var postContentHeight = $('.post-content').height();
+        if ($(window).scrollTop() > postContentOffsetTop && $(window).scrollTop() < (postContentOffsetTop + postContentHeight)) {
+            var heightPassed = $(window).scrollTop() - postContentOffsetTop;
+            var percentage = heightPassed * 100/postContentHeight;
+            $('.progress').css({
+                width: percentage + '%'
+            });
+        }else if($(window).scrollTop() < postContentOffsetTop){
+            $('.progress').css({
+                width: '0%'
+            });
+        }else{
+            $('.progress').css({
+                width: '100%'
+            });
+        };
+    }
+
+    $(window).on('scroll', function(event) {
+        if ($('.post-template').length) {
+            progressBar();
+        };
     });
 
-    filter += 'ga:landingPagePath!=/';
-
-    /**
-    * Authorize Google Compute Engine API.
-    */
-    function authorization() {
-    gapi.client.setApiKey(API_KEY);
-    gapi.auth.authorize({
-     client_id: CLIENT_ID,
-     scope: SCOPES,
-     immediate: true
-    }, function(authResult) {
-        if (authResult && !authResult.error) {
-          var apiQuery = gapi.client.analytics.data.ga.get({
-            'ids': 'ga:160750085',
-            'start-date': '30daysAgo',
-            'end-date': 'yesterday',
-            'metrics': 'ga:entrances',
-            'dimensions': 'ga:landingPagePath',
-            'sort': '-ga:entrances',
-            'filters'    : filter,
-            'max-results': 20
-          });
-          apiQuery.execute(handleCoreReportingResults);
-        } else {
-          console.log('Auth was not successful');
-        }
-      }
-    );
-    }
-
-    function handleCoreReportingResults(results) {
-      if (!results.error) {
-        var check = 0;
-        $.each(results.rows, function(index, val) {
-            var slug = val[0].substring(1).slice(0,-1);
-            slug = slug.replace(/\\/g, '');
-            $.get(ghost.url.api('posts'), {filter:"page:false+slug:"+slug}).done(function (data){
-                if (data.posts[0] && check < 5) {
-                    var viewText = 'views';
-                    if (val[1] == 1) { viewText = 'view'; };
-                    $('.most-viewed ul').append('<li><p class="views">'+ val[1] + ' ' + viewText + ' </p><a href="' + val[0] + '">' + data.posts[0].title + '</a></li>');
-                    check++;
-                };
-            }).fail(function (err){
-              console.log(err);
-            });
-        });
-      } else {
-        alert('There was an error: ' + results.message);
-      }
-    }
-
-    /**
-    * Driver for sample application.
-    */
-    $(window).load(authorization);
+    $(".info-bar").stick_in_parent();
+    $(".sidebar").stick_in_parent();
 
 });

@@ -40,8 +40,8 @@
                             <div class="info-bar">
                                 <h4>{{title}}</h4>
                                 <div class="social">
-                                    <a class="twitter" href="https://twitter.com/intent/tweet/?text={{title}}&url={{@blog.url}}{{url}}" target="_blank" title="Share on Twitter"></a>
-                                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{@blog.url}}{{url}}" target="_blank" title="Share on Facebook"></a>
+                                    <a class="twitter" href="https://twitter.com/intent/tweet/?text={{title}}&url={{@blog.url}}{{url}}" target="_blank" title="Share on Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{@blog.url}}{{url}}" target="_blank" title="Share on Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                                 </div>
                                 <div class="progress"></div>
                             </div>
@@ -51,6 +51,30 @@
                         <div class="comments">
                             <a href="#" class="comments-trigger"></a>
                         </div>
+
+                        <div class="related-posts">
+                            {{#get "posts" limit="1" include="tags" filter="id:-{{comment_id}}+tag:{{primary_tag.slug}}"}}
+                                <div class="row loop-big">
+                                    <div class="col-md-12">
+                                        {{#foreach posts}}
+                                            {{> "loop-big"}}
+                                        {{/foreach}}
+                                    </div>
+                                </div>
+                            {{/get}}
+                            {{#get "posts" limit="7" include="tags" filter="id:-{{comment_id}}+tag:{{primary_tag.slug}}"}}
+                                <div class="row loop-small">
+                                    {{#foreach posts}}
+                                        {{^if @first}}
+                                        <div class="col-md-4">
+                                            {{> "loop-small"}}
+                                        </div>
+                                        {{/if}}
+                                    {{/foreach}}
+                                </div>
+                            {{/get}}
+                        </div>
+
                     </div>
                     <div class="col-md-4">
                         {{> "sidebar"}}
@@ -58,17 +82,5 @@
                 </div>
         </article>
     </main>
-    
-    <div class="related-posts container">
-        {{#get "posts" limit="4" include="tags" filter="id:-{{comment_id}}+tag:{{primary_tag.slug}}"}}
-            {{#if posts}}
-                <h3>Related posts</h3>
-                <div class="grid">
-                    {{> "loop"}}
-                    <div class="grid-sizer"></div>
-                </div>
-            {{/if}}
-        {{/get}}
-    </div>
 
 {{/post}}
