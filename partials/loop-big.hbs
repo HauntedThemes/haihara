@@ -3,7 +3,16 @@
     <div class="content">
         <div class="content-holder">
             <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
-            <h2 class="post-title"><a href="{{url}}" title="{{title}}">{{title}}</a></h2>
+            <div class="title-holder">
+                <h2 class="post-title"><a href="{{url}}" title="{{title}}">{{title}}</a></h2>
+                {{#author}}
+                    {{#if profile_image}}
+                        <figure class="author-image">
+                            <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
+                        </figure>
+                    {{/if}}
+                {{/author}}
+            </div>
             <p>
                 {{excerpt words="100"}}
             </p>
@@ -26,11 +35,4 @@
         </div>
         {{/if}}
     </div>
-    {{#author}}
-        {{#if profile_image}}
-            <figure class="author-image">
-                <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
-            </figure>
-        {{/if}}
-    {{/author}}
 </article>

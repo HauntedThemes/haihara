@@ -188,25 +188,6 @@ jQuery(document).ready(function($) {
         swiperRecent.appendSlide('<div class="swiper-slide">' + post[0].outerHTML + '</div>');
     }
 
-    // Initialize Disqus comments
-    if ($('#content').attr('data-id') && config['disqus-shortname'] != '') {
-
-        $('.comments').append('<div id="disqus_thread"></div>')
-
-        var url = [location.protocol, '//', location.host, location.pathname].join('');
-        var disqus_config = function () {
-            this.page.url = url;
-            this.page.identifier = $('#content').attr('data-id');
-        };
-
-        (function() {
-        var d = document, s = d.createElement('script');
-        s.src = '//'+ config['disqus-shortname'] +'.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-        })();
-    };
-
     $('.nav-trigger').on('click', function(event) {
         event.preventDefault();
         if ($('.menu-container').hasClass('active')) {
@@ -408,5 +389,37 @@ jQuery(document).ready(function($) {
 
     $(".info-bar").stick_in_parent();
     $(".sidebar").stick_in_parent();
+
+    // Initialize Disqus comments
+    if ($('#content').attr('data-id') && config['disqus-shortname'] != '') {
+
+        $('.comments-trigger').on('click', function(event) {
+            event.preventDefault();
+
+            if ($('#disqus_thread').length) {
+                $('.comments').toggleClass('active');
+            }else{
+                $('.comments').append('<div id="disqus_thread"></div>').addClass('active');
+
+                var url = [location.protocol, '//', location.host, location.pathname].join('');
+                var disqus_config = function () {
+                    this.page.url = url;
+                    this.page.identifier = $('#content').attr('data-id');
+                };
+
+                (function() {
+                var d = document, s = d.createElement('script');
+                s.src = '//'+ config['disqus-shortname'] +'.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            };
+
+            $(".sidebar").trigger("sticky_kit:detach");
+            $(".sidebar").stick_in_parent();
+
+        });
+
+    };
 
 });

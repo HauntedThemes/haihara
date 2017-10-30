@@ -169,27 +169,22 @@ h1, h2, h3, h4, h5, h6{
 }
 
 blockquote{
-    margin: 0;
-    font-style: italic;
-    position: relative;
-}
-
-blockquote:before{
-    font-family: "icons";
-    content: "\e907";
-    width: 23px;
-    position: absolute;
+    margin: 20px 0;
     font-style: normal;
-    top: 0;
-    left: -10px;
-    height: 20px;
-    color: #cccccc;
-    z-index: 1;
+    position: relative;
+    background-color: #0025C8;
+    padding: 10px 30px;
 }
 
 blockquote p{
+    font-size: 27px;
+    font-weight: 200;
+    line-height: 35px;
+    color: #fff;
     z-index: 2;
     position: relative;
+    font-family: "ropa-soft-pro", sans-serif;
+    font-style: italic;
 }
 
 table{
@@ -1027,6 +1022,10 @@ h3.title.no-posts-found{
     line-height: 21px;
 }
 
+.post-card .content .content-holder .title-holder{
+    position: relative;
+}
+
 .loop-big .post-card .content .content-holder h2{
     font-size: 20px;    
     line-height: 26px;
@@ -1042,12 +1041,15 @@ h3.title.no-posts-found{
     width: 100%;
 }
 
-.loop-big  .post-card .img-holder{
+.loop-big .post-card .img-holder{
     width: 40%;
 }
 
-.loop-big .post-card-big .author-image{
-    top: 65px;
+.loop-big .post-card-big .author-image,
+.featured-slider .post-card-big .author-image{
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    left: -68px;
 }
 
 .widget{
@@ -1397,6 +1399,7 @@ footer .tags li{
 footer .tags li a{
     color: #fff;
     font-weight: normal;
+    text-transform: lowercase;
 }
 
 .author{
@@ -1594,4 +1597,67 @@ footer .tags li a{
 .sidebar{
     display: flex;
     flex-direction: column;
+}
+
+.comments {
+    padding: 0 0 50px 0;
+    margin-top: -30px;
+}
+
+.comments .comments-trigger {
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 22px;
+    color: #fff;
+    line-height: 56px;
+    position: relative;
+    z-index: 22;
+    background-color: #0025C8;
+    border: 2px solid #0025C8;
+    border-radius: 50%;
+    position: relative;
+    -webkit-transition: none 0.3s ease-in-out;
+    -moz-transition: none 0.3s ease-in-out;
+    -o-transition: none 0.3s ease-in-out;
+    transition: none 0.3s ease-in-out;
+}
+
+.comments.active .comments-trigger {
+    background: #fff;
+    color: #0025C8;
+}
+
+.comments .comments-trigger .fa-comment,
+.comments .comments-trigger .fa-times{
+    opacity: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+}
+
+.comments .comments-trigger .fa-times,
+.comments.active .comments-trigger .fa-comment{
+    opacity: 0;
+    color: #0025C8;
+}
+
+.comments.active .comments-trigger .fa-times{
+    opacity: 1;
+}
+
+.comments #disqus_thread{
+    background: #fff;
+    padding: 30px;
+    box-shadow: 0 10px 46px 0 rgba(0,0,0,0.07);
+    border-radius: 10px;
+    margin-top: -10px;
+    display: none;
+}
+
+.comments.active #disqus_thread{
+    display: block;
 }

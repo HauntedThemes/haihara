@@ -49,11 +49,15 @@
                         </section>
 
                         <div class="comments">
-                            <a href="#" class="comments-trigger"></a>
+                            <a href="#" class="comments-trigger">
+                                <i class="fa fa-comment" aria-hidden="true"></i>
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </a>
                         </div>
 
                         <div class="related-posts">
                             {{#get "posts" limit="1" include="tags" filter="id:-{{comment_id}}+tag:{{primary_tag.slug}}"}}
+                                <h3 class="title">You might also like</h3>
                                 <div class="row loop-big">
                                     <div class="col-md-12">
                                         {{#foreach posts}}
