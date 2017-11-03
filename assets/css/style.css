@@ -328,11 +328,11 @@ input::-ms-clear {
     text-transform: uppercase;
     font-size: 14px;
     line-height: 14px;
-    color: #949494;
+    color: #2c0fd2;
     padding: 12px 15px;
-    border-radius: 2px;
+    border-radius: 0;
     box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.05);
-    border: 1px solid #949494;
+    border: 1px solid #2c0fd2;
     background: transparent;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
@@ -341,7 +341,7 @@ input::-ms-clear {
 }
 
 .btn:hover{
-    background: #949494;
+    background: #2c0fd2;
     color: #fff;
 }
 
@@ -364,12 +364,6 @@ input::-ms-clear {
 
 .no-opacity{
     opacity: 0;    
-}
-
-.container{
-    max-width: 1140px;
-    margin: 0 auto;
-    width: 100%;
 }
 
 /* ==========================================================================
@@ -424,6 +418,8 @@ header .search{
     margin-right: 90px;
     position: relative;
     z-index: 9998;
+    width: 450px;
+    display: inline-block;
 }
 
 header .search #search-field{
@@ -443,7 +439,7 @@ header .search #search-field{
     transition: all 0.3s ease-in-out;
 }
 
-header .search.active #search-field{
+body.search-visible #search-field{
     transform: translateX(0%);
 }
 
@@ -479,11 +475,11 @@ header .nav-trigger i{
 }
 
 header .nav-trigger .fa-bars,
-header .menu-container.active .nav-trigger .fa-times{
+body.menu-visible .nav-trigger .fa-times{
     opacity: 1;
 }
 
-header .menu-container.active .nav-trigger .fa-bars,
+body.menu-visible .nav-trigger .fa-bars,
 header .nav-trigger .fa-times{
     opacity: 0;
 }
@@ -509,7 +505,7 @@ header .menu-container{
     transition: transform 0.3s ease-in-out;
 }
 
-header .menu-container.active{
+body.menu-visible .menu-container{
     transform: translate3d(0, 0, 0);
 }
 
@@ -517,6 +513,27 @@ header .menu-container .menu-content{
     overflow: auto;
     max-height: 100vh;
     padding: 90px 0;
+}
+
+header .menu-container .menu-backdrop{
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9000;
+    background: rgba(0,0,0,0.2);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+body.search-visible header .menu-container .menu-backdrop{
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 header .menu-container ul{
@@ -570,13 +587,13 @@ header .search-results{
     transition: visibility 0.3s ease-in-out, max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
-header .search-results.active{
+body.search-visible header .search-results.active{
     transition: visibility 0.3s ease-in-out, max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
     max-height: calc(100vh - 90px);
     overflow: auto;
     visibility: visible;
     opacity: 1;
-    padding: 60px 0 60px 90px;
+    padding: 0 0 0 90px;
 }
 
 .read-more{
@@ -1218,10 +1235,15 @@ h3.title.no-posts-found{
     transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-.backdrop.active{
+body.menu-visible .backdrop,
+body.search-visible .backdrop{
     visibility: visible;
     opacity: 1;
     pointer-events: auto;
+}
+
+body.search-visible .nav-trigger{
+    z-index: 8000;
 }
 
 .search-results .search-slider{
@@ -1247,12 +1269,20 @@ h3.title.no-posts-found{
 
 .search-results .search-slider .swiper-wrapper .swiper-slide{
     width: calc(33.33% - 20px);
-    margin-bottom: 30px;
+    margin-bottom: 0;
     margin-right: 30px;
+}
+
+.search-results .search-slider .swiper-wrapper .swiper-slide:nth-child(-n+3){
+    margin-top: 45px;
 }
 
 .search-results .search-slider .swiper-wrapper .swiper-slide:nth-child(3n+3){
     margin-right: 0;
+}
+
+.search-results .post-card .content .content-holder h3{
+    margin-bottom: 45px;
 }
 
 .nav-tabs{
@@ -1464,12 +1494,17 @@ footer .tags li a{
 
 .author .author-meta{
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .author .author-meta span{
     display: inline-block;
     vertical-align: top;
-    margin: 0 20px 0 0;
+    margin: 0 10px;
 }
 
 .author .author-meta span:last-child{
@@ -1660,4 +1695,137 @@ footer .tags li a{
 
 .comments.active #disqus_thread{
     display: block;
+}
+
+.tag-template h1.name{
+    font-size: 50px;
+    font-weight: 900;
+    font-family: "dienstag", sans-serif;
+    color: #0000BC;
+    text-transform: lowercase;
+    margin: 0;
+    line-height: 200px;
+}
+
+.tag-template h1.name:before{
+    content: '#';
+}
+
+.tag-template header{
+    margin-bottom: 0;
+}
+
+.loop-medium .post-card{
+    width: 100%;
+}
+
+.loop-medium .post-card .content .content-holder{
+    width: 60%;
+    padding: 32px 67px 25px 67px;
+}
+
+.loop-medium .post-card .img-holder{
+    width: 40%;
+    height: calc(100% - 65px);
+}
+
+.loop-medium .post-card .content .content-holder h3{
+    margin: 20px 0;
+}
+
+.pagination-container{
+    text-align: center;
+    margin: 50px 0 100px 0;
+}
+
+#load-posts{
+    margin: 0 auto;
+    display: none;
+}
+
+#load-posts.active{
+    display: block;
+}
+
+#load-posts.active + .pagination{
+    display: none;
+}
+
+.pagination{
+    text-align: center;
+    text-transform: uppercase;
+    color: #B7B7B7;
+    font-size: 14px;
+    position: relative;
+    max-width: 1140px;
+    margin: 0;
+    display: block;
+}
+
+.pagination .container{
+    position: relative;
+}
+
+.pagination a{
+    color: #606060;
+    font-size: 14px;
+    line-height: 19px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.pagination a:hover{
+    color: #000;
+}
+
+.pagination a.older-posts{
+    left: auto;
+    right: 0;
+}
+
+.author-template header{
+    margin-bottom: 0;
+}
+
+.author-template section.author{
+    text-align: left;
+    margin-bottom: 100px;
+}
+
+.author-template section.author h1 a{
+    font-size: 50px;
+    font-weight: 900;
+    font-family: "dienstag", sans-serif;
+    color: #0000BC;
+    margin: 0;
+    line-height: 70px;
+    text-align: center;
+}
+
+@media (max-width: 991px) {
+    .post-card .content{
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+    }
+    .post-card .content .content-holder{
+        width: 100%;
+        flex: 1;
+    }
+    .post-card .img-holder{
+        width: 100%;
+        height: 300px;
+    }
+    .featured-slider .post-card .img-holder{
+        height: 500px;
+    }
+    .loop-big .post-card .img-holder{
+        width: 100%;
+    }
+    .loop-big .post-card .content .content-holder{
+        width: 100%;
+    }
+    .sidebar{
+        margin-bottom: 50px;
+    }
 }

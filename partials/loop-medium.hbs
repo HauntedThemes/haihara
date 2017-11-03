@@ -1,0 +1,20 @@
+{{!-- This is the post loop - each post will be output using this markup --}}
+<article class="{{post_class}} post-card post-card-medium {{^if feature_image}}no-image{{/if}}">
+    <div class="content">
+        <div class="content-holder">
+            <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+            <h3 class="post-title"><a href="{{url}}" title="{{title}}">{{title}}</a></h3>
+            <p>
+                {{excerpt words="40"}}
+            </p>
+            <a href="{{url}}" title="{{title}}" class="read-more">Read more</a>
+        </div>
+        {{#if feature_image}}
+        <div class="img-holder">
+            <a href="{{url}}" title="{{title}}">
+                <span style="background-image: url({{img_url feature_image}})"></span>
+            </a>
+        </div>
+        {{/if}}
+    </div>
+</article>

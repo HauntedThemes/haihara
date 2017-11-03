@@ -65,11 +65,11 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12 col-lg-8">
                 {{#get "tags" limit="all"}}
                     {{#foreach tags}}
                         <h3 class="title">{{name}}</h3>
-                        <a href="/tag/{{slug}}" class="view-all">View all</a>
+                        <a href="{{url}}" class="view-all">View all</a>
                         <div class="row loop-big">
                             <div class="col-md-12">
                                 {{#get "posts" limit="1" include="author,tags" filter="tag:{{slug}}"}}
@@ -93,7 +93,7 @@
                     {{/foreach}}
                 {{/get}}
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-12">
                 {{> "sidebar"}}
             </div>
         </div>

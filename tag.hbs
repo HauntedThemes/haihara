@@ -2,21 +2,33 @@
 {{!< default}}
 
 {{!-- The main content area - Masonry grid --}}
-<main id="content" class="container" role="main">
-	<div class="tags-container">
-		{{#get "tags" limit="all"}}
-		    <ul class="tags">
-		    {{#foreach tags}}
-		        <li>
-		            <a href="{{url}}" title="{{name}}" class="tag tag-{{id}} {{slug}}">{{name}}</a>
-		        </li>  
-		    {{/foreach}}
-		    </ul>
-		{{/get}}
+<main id="content" role="main">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="name">{{tag.name}}</h1>
+			</div>
+		</div>
 	</div>
-	<div class="grid">
-	    {{> "loop"}}
-	    <div class="grid-sizer"></div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="loop-medium">
+					{{#foreach posts}}
+		    			{{> "loop-medium"}}
+				    {{/foreach}}
+				</div>
+			</div>
+            <div class="col-md-4">
+                {{> "sidebar"}}
+            </div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">
+				{{pagination}}
+			</div>
+		</div>
 	</div>
+
 </main>
-{{pagination}}

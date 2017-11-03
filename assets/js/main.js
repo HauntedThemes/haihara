@@ -8,7 +8,7 @@ jQuery(document).ready(function($) {
         'share-selected-text': true,
         'load-more': true,
         'infinite-scroll': true,
-        'infinite-scroll-step': 3,
+        'infinite-scroll-step': 1,
         'disqus-shortname': 'hauntedthemes-demo'
     };
 
@@ -190,37 +190,18 @@ jQuery(document).ready(function($) {
 
     $('.nav-trigger').on('click', function(event) {
         event.preventDefault();
-        if ($('.menu-container').hasClass('active')) {
-            $('.menu-container').removeClass('active');
-            $('.backdrop').removeClass('active');
-        }else{
-            $('.menu-container').addClass('active');
-            $('.backdrop').addClass('active');
-        }
+        $('body').toggleClass('menu-visible');
     });
 
     $('.search-trigger').on('click', function(event) {
         event.preventDefault();
-        if ($('.search').hasClass('active')) {
-            $('.search').removeClass('active');
-            $('.search-results').removeClass('active');
-            $('.backdrop').removeClass('active');
-        }else{
-            $('.search').addClass('active');
-            $('.backdrop').addClass('active');
-            $('.search #search-field').focus();
-        }
+        $('.search #search-field').focus();
+        $('body').toggleClass('search-visible');
     });
 
-    $('.backdrop').on('click', function(event) {
+    $('.backdrop, .menu-backdrop').on('click', function(event) {
         event.preventDefault();
-        $('.backdrop').toggleClass('active');
-        if ($('.menu-container').hasClass('active')) {
-            $('.menu-container').removeClass('active');
-        }else if($('.search').hasClass('active')) {
-            $('.search').removeClass('active');
-            $('.search-results').removeClass('active');
-        };
+        $('body').removeClass('search-visible menu-visible');
     });
 
     // Initialize ghostHunter - A Ghost blog search engine
@@ -232,13 +213,11 @@ jQuery(document).ready(function($) {
         info_template       : "<h3 class='title'>Number of posts found: {{amount}}</h3>",
         result_template     : "<li class='swiper-slide'><article class='post post-card post-card-small'><div class='content'><div class='content-holder'><time class='post-date' datetime='{{pubDate}}'>{{pubDate}}</time><h3 class='post-title'><a href='{{link}}' title='{{title}}'>{{title}}</a></h3></div></div></article></li>",
         onComplete      : function( results ){
-
             if ($("#search-field").val() == '') {
                 $('.search-results').removeClass('active');
             }else{
                 $('.search-results').addClass('active');
                 $('.search-results .title:not(.active)').prependTo('.search-slider').addClass('active');
-                console.log($("#search-field").val());
 
                 var resultsCount = $('#results li').length;
                 var slidesPerView = 5;
@@ -247,7 +226,7 @@ jQuery(document).ready(function($) {
                 if (resultsCount <= 15) {
                     slidesPerView = resultsCount / 5;
                 };
-                console.log(resultsCount);
+
                 if (resultsCount == 0) {
                     $('<h3 class="title no-posts-found">No posts found</h3>').appendTo('#results');
                 }else{
@@ -387,8 +366,13 @@ jQuery(document).ready(function($) {
         };
     });
 
-    $(".info-bar").stick_in_parent();
-    $(".sidebar").stick_in_parent();
+    $(window).on('load', function(event) {
+        $(".sidebar").stick_in_parent({
+            offset_top: 15
+        });
+        $(".info-bar").stick_in_parent();
+    });
+
 
     // Initialize Disqus comments
     if ($('#content').attr('data-id') && config['disqus-shortname'] != '') {
@@ -421,5 +405,133 @@ jQuery(document).ready(function($) {
         });
 
     };
+
+    var currentPage = 1;
+    var pathname = window.location.pathname;
+    var $document = $(document);
+    var $result = $('.loop-big');
+    var buffer = 100;
+    var step = 0;
+
+    var ticking = false;
+    var isLoading = false;
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $document.height();
+
+    // remove hash params from pathname
+    pathname = pathname.replace(/#(.*)$/g, '').replace('/\//g', '/');
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $document.height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(infiniteScroll)
+        }
+        ticking = true;
+    }
+
+    function infiniteScroll () {
+        // return if already loading
+        if (isLoading) {
+            return;
+        }
+
+        // return if not scroll to the bottom
+        if (lastScrollY + lastWindowHeight <= lastDocumentHeight - buffer) {
+            ticking = false;
+            return;
+        }
+
+        // return if currentPage is the last page already
+        if (currentPage === maxPages) {
+            return;
+        }
+
+        if (step >= config['infinite-scroll-step']) {
+            return;
+        };
+
+        isLoading = true;
+
+        // next page
+        currentPage++;
+
+        // Load more
+        var nextPage = pathname + 'page/' + currentPage + '/';
+
+        $.get(nextPage, function (content) {
+            $result.append($(content).find('.post'));
+            step++;
+
+        }).fail(function (xhr) {
+            // 404 indicates we've run out of pages
+            if (xhr.status === 404) {
+                window.removeEventListener('scroll', onScroll, {passive: true});
+                window.removeEventListener('resize', onResize);
+            }
+
+        }).always(function () {
+            lastDocumentHeight = $document.height();
+            isLoading = false;
+            ticking = false;
+        });
+    }
+
+    if ($('.pagination').length) {
+        if (config['load-more']){
+            $('#load-posts').addClass('active');
+        }
+
+        if (config['infinite-scroll'] && config['load-more']) {
+            window.addEventListener('scroll', onScroll, {passive: true});
+            window.addEventListener('resize', onResize);
+        }
+
+        $('#load-posts').on('click', function(event) {
+            event.preventDefault();
+
+            // return if currentPage is the last page already
+            if (currentPage === maxPages) {
+                return;
+            }
+
+            // next page
+            currentPage++;
+
+            // Load more
+            var nextPage = pathname + 'page/' + currentPage + '/';
+
+            $.get(nextPage, function (content) {
+                $result.append($(content).find('.post'));
+                step = 0;
+            }).always(function () {
+                lastDocumentHeight = $document.height();
+                isLoading = false;
+                ticking = false;
+            });;
+
+        });
+
+        infiniteScroll();
+    };
+
+
+    $('.dsq-widget-list').each(function(index, el) {
+        var count = $(this).find('li').length;
+        if (count == 0) {
+            $(this).parent().remove();
+        };
+    });
 
 });
