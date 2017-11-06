@@ -490,7 +490,8 @@ header .nopadding{
 
 header .menu-container{
     background-color: #0025C8;
-    width: 380px;
+    max-width: 380px;
+    width: 100%;
     color: #fff;
     position: absolute;
     top: 0;
@@ -584,16 +585,15 @@ header .search-results{
     -webkit-transition: visibility 0s ease-in-out, max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
     -moz-transition: visibility 0s ease-in-out, max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
     -o-transition: visibility 0s ease-in-out, max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
-    transition: visibility 0.3s ease-in-out, max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
+    transition: visibility 0.3s ease-in-out, max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 body.search-visible header .search-results.active{
-    transition: visibility 0.3s ease-in-out, max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+    transition: visibility 0.3s ease-in-out, max-height 0.3s ease-in-out;
     max-height: calc(100vh - 90px);
     overflow: auto;
     visibility: visible;
     opacity: 1;
-    padding: 0 0 0 90px;
 }
 
 .read-more{
@@ -1703,8 +1703,7 @@ footer .tags li a{
     font-family: "dienstag", sans-serif;
     color: #0000BC;
     text-transform: lowercase;
-    margin: 0;
-    line-height: 200px;
+    margin: 70px 0;
 }
 
 .tag-template h1.name:before{
@@ -1803,6 +1802,12 @@ footer .tags li a{
     text-align: center;
 }
 
+@media (max-width: 1199px) {
+    header .search{
+        width: 376px;
+    }
+}
+
 @media (max-width: 991px) {
     .post-card .content{
         flex-direction: column-reverse;
@@ -1827,5 +1832,170 @@ footer .tags li a{
     }
     .sidebar{
         margin-bottom: 50px;
+    }
+    .post-card.post-card-medium .content{
+        flex-direction: row;
+    }
+    .tag-template h1.name{
+        font-size: 42px;
+    }
+}
+
+@media (max-width: 767px) {
+    .tag-template h1.name{
+        font-size: 32px;
+    }
+    .post-card.post-card-medium .content{
+        flex-direction: column-reverse;
+    }
+    .loop-medium .post-card .content .content-holder{
+        padding: 25px 25px 10px 25px;
+        width: 100%;
+        flex: 1;
+    }
+    .loop-medium .post-card .content .img-holder{
+        width: 100%;
+        height: 300px;
+    }
+    header .blog-logo{
+        margin-left: 15px;
+    }
+    code, pre{
+        line-height: 21px;
+    }
+    pre{
+        padding: 10px;
+        margin-top: 10px;
+    }
+    p, ol, ul, dl{
+        font-size: 15px;
+        line-height: 21px;
+    }
+    .post-content .info-bar h4{
+        margin: 0 101px 0 25px;
+    }
+    .post-content .info-bar{
+        margin-left: -25px;
+    }
+    .post-content{
+        padding: 25px;
+    }
+    .post-cover{
+        min-height: 400px;
+    }
+    .post-cover h1{
+        font-size: 36px;
+        line-height: 42px;
+        max-width: calc(100% - 30px);
+    }
+    footer .tags{
+        font-size: 16px;
+        line-height: 36px;
+    }
+    .tab-content .col-md-12{
+        padding: 35px 25px;
+    }
+    .nav-tabs li a.nav-link{
+        min-width: 140px;
+    }
+    .post-card .content .content-holder h4{
+        margin-bottom: 15px;
+    }
+    .loop-small{
+        padding-left: 25px;
+        margin-bottom: 50px;
+    }
+    .post-card .author-image{
+        width: 40px;
+        height: 40px;
+    }
+    .loop-big .post-card-big .author-image, .featured-slider .post-card-big .author-image{
+        left: -26px;
+    }
+    .post-card .content .content-holder h2{
+        font-size: 24px;
+        line-height: 28px;
+        margin: 15px 0;
+    }
+    .post-card-big .content .content-holder p {
+        font-size: 15px;
+        line-height: 21px;
+    }
+    .post-card-big .content .content-holder{
+        padding: 25px;
+    }
+    .featured-slider .post-card .img-holder{
+        height: 300px;
+    }
+    .featured-navigation{
+        display: none;
+    }
+    .featured-slider{
+        margin-bottom: 50px;
+    }
+    header{
+        margin-bottom: 50px;
+    }
+    header .blog-logo-container{
+        max-width: calc(100% - 120px);
+        position: relative;
+        z-index: 9999;
+    }
+    header .search-results{
+        top: 61px;
+        width: 100%;
+        height: calc(100vh - 60px);
+        max-height: calc(100vh - 60px);
+        padding: 0;
+    }
+    body.search-visible header .search-results.active{
+        height: calc(100vh - 60px);
+        max-height: calc(100vh - 60px);
+    }
+    .search-results .post-card .content .content-holder h3{
+        margin-bottom: 30px;
+    }
+    body.search-visible header .blog-logo-container{
+        z-index: 9992;
+    }
+    .search-results .search-slider .swiper-wrapper .swiper-slide:nth-child(-n+3){
+        margin-top: 0;
+    }
+    .search-results .search-slider .swiper-wrapper .swiper-slide:first-child{
+        margin-top: 15px;
+    }
+    .search-results .search-slider .swiper-wrapper .swiper-slide{
+        width: 100%;
+        margin-right: 0;
+    }
+    header .search{
+        position: absolute;
+        top: -60px;
+        right: -30px;
+        left: auto;
+        width: calc(100% - 60px);
+    }
+    header .blog-logo{
+        font-size: 16px;
+        line-height: 60px;
+    }
+    header .nav-trigger{
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+    }
+    header .menu-container .menu-content{
+        padding: 60px 0;
+    }
+    header .menu-container{
+        transform: translate3d(calc(100% - 60px), calc(-100% + 60px), 0);
+    }
+    header .search #search-field{
+        height: 60px;
+    }
+    header .search-trigger{
+        height: 60px;
+        width: 60px;
+        line-height: 60px;
     }
 }

@@ -62,6 +62,13 @@ jQuery(document).ready(function($) {
             slidesPerView: 2,
             slidesPerColumn: 2,
             slidesPerGroup: 2,
+            breakpoints: {
+                767: {
+                    slidesPerView: 1,
+                    slidesPerColumn: 2,
+                    slidesPerGroup: 1,
+                },
+            }
         });
         swiperRecent.on('reachEnd', function(event) {
 

@@ -1,12 +1,12 @@
         <header>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-3 nopadding">
+                    <div class="col-md-4 blog-logo-container nopadding">
                         <a class="blog-logo" href="{{@blog.url}}" title="{{@blog.title}}">
                             {{#if @blog.logo}} <img src="{{@blog.logo}}" alt="{{@blog.title}}" /> {{else}}{{@blog.title}}{{/if}} 
                         </a>
                     </div>
-                    <div class="col-md-9 nopadding text-right">
+                    <div class="col-md-8 nopadding text-right">
                         <form class="search">
                             <input id="search-field" placeholder="Search" autocomplete="off"/>
                             <a href="#" class="search-trigger"><i class="fa fa-search" aria-hidden="true"></i></a>
