@@ -371,6 +371,10 @@ jQuery(document).ready(function($) {
         if ($('.post-template').length) {
             progressBar();
         };
+        var top = $(window).scrollTop();
+        if (top > (h/1.33)) {
+            $('body.menu-visible .backdrop, body.search-visible .backdrop').click();
+        };
     });
 
     $(window).on('load', function(event) {
@@ -380,6 +384,10 @@ jQuery(document).ready(function($) {
         $(".info-bar").stick_in_parent();
     });
 
+    $(window).on('resize', function(event) {
+        w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    });
 
     // Initialize Disqus comments
     if ($('#content').attr('data-id') && config['disqus-shortname'] != '') {
@@ -416,7 +424,7 @@ jQuery(document).ready(function($) {
     var currentPage = 1;
     var pathname = window.location.pathname;
     var $document = $(document);
-    var $result = $('.loop-big');
+    var $result = $('.loop-medium');
     var buffer = 100;
     var step = 0;
 
@@ -489,6 +497,13 @@ jQuery(document).ready(function($) {
             }
 
         }).always(function () {
+            $(".sidebar").trigger("sticky_kit:detach");
+            $(".sidebar").stick_in_parent({
+                offset_top: 15
+            });
+            if (currentPage == maxPages) {
+                $('#load-posts').addClass('last').text('No more posts');
+            };
             lastDocumentHeight = $document.height();
             isLoading = false;
             ticking = false;
@@ -523,6 +538,13 @@ jQuery(document).ready(function($) {
                 $result.append($(content).find('.post'));
                 step = 0;
             }).always(function () {
+                $(".sidebar").trigger("sticky_kit:detach");
+                $(".sidebar").stick_in_parent({
+                    offset_top: 15
+                });
+                if (currentPage == maxPages) {
+                    $('#load-posts').addClass('last').text('No more posts');
+                };
                 lastDocumentHeight = $document.height();
                 isLoading = false;
                 ticking = false;
@@ -540,5 +562,23 @@ jQuery(document).ready(function($) {
             $(this).parent().remove();
         };
     });
+
+    // Validate Subscribe input
+    $('.gh-signin').on('submit', function(event) {
+        var email = $('.gh-input').val();
+        if (!validateEmail(email)) {
+            $('.gh-input').addClass('error');
+            setTimeout(function() {
+                $('.gh-input').removeClass('error');
+            }, 500);
+            event.preventDefault();
+        };
+    });
+
+    // Validate email input
+    function validateEmail(email) {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    } 
 
 });

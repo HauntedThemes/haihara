@@ -124,7 +124,7 @@ body{
 }
 
 a{
-    color: #000000;
+    color: #0025C8;
     text-decoration: none;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
@@ -133,7 +133,7 @@ a{
 }
 
 a:hover{
-    color: #373737;
+    color: #FB0007;
     text-decoration: none;
 }
 
@@ -162,7 +162,7 @@ h6{
 }
 
 h1, h2, h3, h4, h5, h6{
-    font-family: "ropa-soft-pro", sans-serif;
+    font-family: "ropa-soft-pro", "Roboto Condensed", sans-serif;
     color: #333333;
     margin: 30px 0;
     font-weight: 700;
@@ -183,7 +183,7 @@ blockquote p{
     color: #fff;
     z-index: 2;
     position: relative;
-    font-family: "ropa-soft-pro", sans-serif;
+    font-family: "ropa-soft-pro", "Roboto Condensed", sans-serif;
     font-style: italic;
 }
 
@@ -375,8 +375,8 @@ input::-ms-clear {
 }
 
 header{
-    margin-bottom: 100px;
     position: relative;
+    margin-bottom: 100px;
 }
 
 header .blog-logo{
@@ -385,7 +385,7 @@ header .blog-logo{
     font-weight: bold;
     line-height: 90px;
     display: inline-block;
-    font-family: "dienstag", sans-serif;
+    font-family: "dienstag", "Montserrat", sans-serif;
     margin-left: 30px;
 }
 
@@ -607,6 +607,10 @@ body.search-visible header .search-results.active{
     margin-top: auto;
 }
 
+.read-more:hover{
+    color: #0025C8;
+}
+
 .view-all{
     color: #0000BC;
     font-size: 11px;
@@ -730,6 +734,10 @@ h3.title.no-posts-found{
     display: block;
 }
 
+.post-card .content .content-holder h2 a:hover{
+    color: #FB0007;
+}
+
 .post-card .content .content-holder h3{
     line-height: 26px;
     font-weight: normal;
@@ -740,6 +748,10 @@ h3.title.no-posts-found{
 .post-card .content .content-holder h3 a{
     color: #0000BC;
     display: block;
+}
+
+.post-card .content .content-holder h3 a:hover{
+    color: #FB0007;
 }
 
 .post-card .content .content-holder p{
@@ -908,7 +920,15 @@ h3.title.no-posts-found{
     cursor: pointer;
     margin-right: 2px;
     position: relative;
-    font-family: "ropa-soft-pro", sans-serif;
+    font-family: "ropa-soft-pro", "Roboto Condensed", sans-serif;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.featured-navigation li:hover{
+    color: #FB0007;
 }
 
 .featured-navigation li:last-child{
@@ -961,7 +981,7 @@ h3.title.no-posts-found{
     font-size: 13px;
     font-weight: 900;
     line-height: 18px;
-    font-family: "dienstag", sans-serif;
+    font-family: "dienstag", "Montserrat", sans-serif;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -1010,6 +1030,10 @@ h3.title.no-posts-found{
 
 .post-card .content .content-holder h4 a{
     color: #0000BC;
+}
+
+.post-card .content .content-holder h4 a:hover{
+    color: #FB0007;
 }
 
 .post-card .author-image{
@@ -1094,6 +1118,14 @@ h3.title.no-posts-found{
     padding: 20px;
     margin: 0 0 1px 0;
     position: relative;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.widget ul li:hover{
+    padding-left: 30px;
 }
 
 .most-viewed ul li p{
@@ -1110,7 +1142,7 @@ h3.title.no-posts-found{
     line-height: 25px;
     font-size: 15px;
     color: #262626;
-    font-family: "ropa-soft-pro", sans-serif;
+    font-family: "ropa-soft-pro", "Roboto Condensed", sans-serif;
     font-weight: normal;
     display: inline-block;
 }
@@ -1142,7 +1174,7 @@ h3.title.no-posts-found{
     line-height: 19px;
     font-size: 15px;
     color: #262626;
-    font-family: "ropa-soft-pro", sans-serif;
+    font-family: "ropa-soft-pro", "Roboto Condensed", sans-serif;
 }
 
 .dsq-widget-list .dsq-widget-item{
@@ -1186,7 +1218,7 @@ h3.title.no-posts-found{
     line-height: 25px;
     font-size: 15px;
     color: #262626;
-    font-family: "ropa-soft-pro", sans-serif;
+    font-family: "ropa-soft-pro", "Roboto Condensed", sans-serif;
     font-weight: normal;
 }
 
@@ -1306,7 +1338,7 @@ body.search-visible .nav-trigger{
     font-size: 20px;
     background: transparent;
     color: #0025C8;
-    font-family: "ropa-soft-pro", sans-serif;
+    font-family: "ropa-soft-pro", "Roboto Condensed", sans-serif;
     padding: 13px 30px;
     min-width: 180px;
     text-align: center;
@@ -1430,6 +1462,70 @@ footer .tags li a{
     color: #fff;
     font-weight: normal;
     text-transform: lowercase;
+}
+
+.gh-signin{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 475px;
+}
+
+.gh-signin .gh-input{
+    background: #fff;
+}
+
+.gh-signin .form-group{
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.gh-input.error{
+    animation: shake .5s linear;
+    -webkit-animation: shake .5s linear;
+}
+
+@-webkit-keyframes shake {
+    8%, 41% {
+        -webkit-transform: translateX(-10px);
+    }
+    25%, 58% {
+        -webkit-transform: translateX(10px);
+    }
+    75% {
+        -webkit-transform: translateX(-5px);
+    }
+    92% {
+        -webkit-transform: translateX(5px);
+    }
+    0%, 100% {
+        -webkit-transform: translateX(0);
+    }
+}
+
+footer form button[type="submit"], .gh-signin button[type="submit"]{
+    font-size: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    line-height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 20px;
+    z-index: 22;
+    height: 20px;
+    display: block;
+    right: 15px;
+}
+
+footer form button[type="submit"]:before, .gh-signin button[type="submit"]:before{
+    font-family: "FontAwesome";
+    content: "\f061";
+    font-size: 12px;
+    color: #2c0fd2;
 }
 
 .author{
@@ -1654,10 +1750,19 @@ footer .tags li a{
     border: 2px solid #0025C8;
     border-radius: 50%;
     position: relative;
-    -webkit-transition: none 0.3s ease-in-out;
-    -moz-transition: none 0.3s ease-in-out;
-    -o-transition: none 0.3s ease-in-out;
-    transition: none 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.comments .comments-trigger:hover{
+    background: #FB0007;
+    border: 2px solid #FB0007;
+}
+
+.comments.active .comments-trigger:hover{
+    color: #FB0007;
 }
 
 .comments.active .comments-trigger {
@@ -1677,7 +1782,6 @@ footer .tags li a{
 .comments .comments-trigger .fa-times,
 .comments.active .comments-trigger .fa-comment{
     opacity: 0;
-    color: #0025C8;
 }
 
 .comments.active .comments-trigger .fa-times{
@@ -1700,7 +1804,7 @@ footer .tags li a{
 .tag-template h1.name{
     font-size: 50px;
     font-weight: 900;
-    font-family: "dienstag", sans-serif;
+    font-family: "dienstag", "Montserrat", sans-serif;
     color: #0000BC;
     text-transform: lowercase;
     margin: 70px 0;
@@ -1750,6 +1854,18 @@ footer .tags li a{
     display: none;
 }
 
+#load-posts.last{
+    border: 1px solid transparent;
+    cursor: default;
+    outline: none;
+    box-shadow: none;
+}
+
+#load-posts.last:hover{
+    background: none;
+    color: #0025C8;
+}
+
 .pagination{
     text-align: center;
     text-transform: uppercase;
@@ -1795,11 +1911,15 @@ footer .tags li a{
 .author-template section.author h1 a{
     font-size: 50px;
     font-weight: 900;
-    font-family: "dienstag", sans-serif;
+    font-family: "dienstag", "Montserrat", sans-serif;
     color: #0000BC;
     margin: 0;
     line-height: 70px;
     text-align: center;
+}
+
+.subscribe .gh-signin .gh-input{
+    background: #f0f0f0;
 }
 
 @media (max-width: 1199px) {
