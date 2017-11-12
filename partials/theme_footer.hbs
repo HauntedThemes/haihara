@@ -1,59 +1,49 @@
     <div class="backdrop"></div>
 
-    <footer class="site-footer clearfix">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="tags-tab" data-toggle="tab" href="#tags" role="tab" aria-controls="tags" aria-selected="true">Tags</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="newsletter-tab" data-toggle="tab" href="#newsletter" role="tab" aria-controls="newsletter" aria-selected="false">Newsletter</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="tags" role="tabpanel" aria-labelledby="tags-tab">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        {{#get "tags" limit="all"}}
-                                            <ul class="tags">
-                                                {{#foreach tags}}
-                                                    <li>
-                                                        <a href="{{url}}">{{name}}</a>
-                                                    </li>
-                                                {{/foreach}}
-                                            </ul>
-                                        {{/get}}
-                                    </div>
-                                </div>
-                            </div>
+    <footer class="site-footer container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="footer-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>Tags</h3>
+                            {{#get "tags" limit="all"}}
+                                <ul class="tags">
+                                    {{#foreach tags}}
+                                        <li>
+                                            <a href="{{url}}">{{name}}</a>
+                                        </li>
+                                    {{/foreach}}
+                                </ul>
+                            {{/get}}
                         </div>
-                        <div class="tab-pane fade" id="newsletter" role="tabpanel" aria-labelledby="newsletter-tab">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        {{subscribe_form
-                                            form_class="gh-signin"
-                                            input_class="gh-input"
-                                            button_class="btn"
-                                            placeholder="Your email address"
-                                        }}
-                                    </div>
-                                </div>
+                        <div class="col-md-6">
+                            <h3>Social</h3>
+                            {{subscribe_form
+                                form_class="gh-signin"
+                                input_class="gh-input"
+                                button_class="btn"
+                                placeholder="Your email address"
+                            }}
+                            <div class="social">
+                                {{#if @blog.facebook}}
+                                    <a href="{{facebook_url}}" class="facebook" title="{{@blog.facebook}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                {{/if}}
+                                {{#if @blog.twitter}}
+                                    <a href="{{twitter_url}}" class="twitter" title="{{@blog.twitter}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                {{/if}}
+                                <a href="https://www.youtube.com/" class="youtube" title="Youtube" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+                                <a href="https://www.instagram.com/" class="instagram" title="Instagram" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                <a href="{{@blog.url}}/rss"><i class="fa fa-rss" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="copyright">&copy; {{date format="YYYY"}}, <a href="{{@blog.url}}">{{@blog.title}}</a>. All Right Reserved.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="social">
-                {{#if @blog.facebook}}
-                    <a href="{{facebook_url}}" class="facebook" title="{{@blog.facebook}}" target="_blank"></a>
-                {{/if}}
-                {{#if @blog.twitter}}
-                    <a href="{{twitter_url}}" class="twitter" title="{{@blog.twitter}}" target="_blank"></a>
-                {{/if}}
             </div>
         </div>
     </footer>

@@ -17,7 +17,7 @@
     {{amp_ghost_head}}
 
     {{!-- Styles'n'Scripts --}}
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900%7CFira+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto+Condensed:400,700|Roboto:400,700" rel="stylesheet">
     <style amp-custom>
         /* ==========================================================================
            Table of Contents
@@ -223,17 +223,6 @@
            1. General - Setting up some base styles
            ========================================================================== */
 
-        @font-face {
-            font-family: 'icons';
-            src: url('../../assets/fonts/icons.eot');
-            src: url('../../assets/fonts/icons.eot#iefix') format('embedded-opentype'),
-               url('../../assets/fonts/icons.woff') format('woff'),
-               url('../../assets/fonts/icons.ttf') format('truetype'),
-               url('../../assets/fonts/icons.svg#icons') format('svg');
-            font-weight: normal;
-            font-style: normal;
-        }
-
         html {
             max-height: 100%;
             height: 100%;
@@ -276,6 +265,7 @@
             color: #333333;
             line-height: 1.15em;
             text-rendering: geometricPrecision;
+            font-family: "Roboto Condensed", sans-serif;
 
             -webkit-font-feature-settings: "dlig" 1, "liga" 1, "lnum" 1, "kern" 1;
             -moz-font-feature-settings: "dlig" 1, "liga" 1, "lnum" 1, "kern" 1;
@@ -284,25 +274,25 @@
 
         p{
             font-size: 15px;
-            line-height: 23px;
+            line-height: 21px;
         }
         h1{
-            font-size: 32px;
+            font-size: 36px;
         }
         h2{
-            font-size: 24px;
+            font-size: 30px;
         }
         h3{
-            font-size: 18px;
+            font-size: 24px;
         }
         h4{
-            font-size: 14px;
+            font-size: 18px;
         }
         h5{
-            font-size: 12px;
+            font-size: 14px;
         }
         h6{
-            font-size: 10px;
+            font-size: 12px;
         }
 
         a {
@@ -384,31 +374,25 @@
 
         blockquote {
             box-sizing: border-box;
-            margin: 1.75em 0 1.75em 0;
-            padding: 0;
             position: relative;
+            margin: 20px 0;
+            font-style: normal;
+            background-color: #0025C8;
+            padding: 10px 30px;
 
             -moz-box-sizing: border-box;
         }
 
-        blockquote:before {
-            font-family: "icons";
-            content: "\e907";
-            width: 23px;
-            position: absolute;
-            font-style: normal;
-            top: 0;
-            left: -10px;
-            height: 20px;
-            color: #cccccc;
-            z-index: 1;
-        }
-
         blockquote p {
-            margin: 0.8em 0;
-            font-style: italic;
-            position: relative;
+            font-size: 19px;
+            font-weight: 200;
+            line-height: 26px;
+            color: #fff;
             z-index: 2;
+            position: relative;
+            font-family: "Roboto Condensed", sans-serif;
+            font-style: italic;
+            margin: 20px 0;
         }
 
         blockquote small {
@@ -690,6 +674,24 @@
             border-radius: 5px;
         }
 
+        .post-content {
+            padding: 25px;
+        }
+
+        .post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
+            color: #0000BC;
+        }
+
+        .post-content a{
+            color: #0025C8;
+            border-bottom: 1px solid #0025C8;
+        }
+
+        .post-content a:hover{
+            color: #FB0007;
+            border-bottom: 1px solid #FB0007;
+        }
+
         .post-header {
             margin-bottom: 1rem;
         }
@@ -723,14 +725,6 @@
             display: inline-block;
         }
 
-        .post-date {
-            display: inline-block;
-            white-space: nowrap;
-            font-weight: normal;
-            font-size: 1.2rem;
-            line-height: 1.2em;
-        }
-
         .post-image {
             margin: 2.5rem 0 0 0;
             padding-top: 3rem;
@@ -753,84 +747,97 @@
             height: auto;
         }
 
+        .post-cover{
+            min-height: 400px;
+            display: flex;
+            color: #fff;
+            position: relative;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow: hidden;
+        }
+
+        .post-cover amp-img{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            width: 600px;
+            height: 400px;
+        }
+
+        .post-cover:before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+
+        .post-cover h1{
+            color: #fff;
+            position: relative;
+            z-index: 5;
+            font-weight: normal;
+            text-align: center;
+            font-size: 36px;
+            line-height: 42px;
+            max-width: calc(100% - 30px);
+        }
+
+        .post-cover .tags-container{
+            margin: 30px;
+            min-height: 20px;
+            display: block;
+        }
+
         .tags{
-            text-transform: uppercase;
-            font-weight: 700;
-            margin: 0;
+            font-size: 13px;
+            font-weight: 900;
+            line-height: 18px;
+            font-family: "Montserrat", sans-serif;
             list-style-type: none;
+            margin: 0;
             padding: 0;
-            line-height: 1;
-            font-size: 0;
-        }
-
-        .tags li{
-            display: inline-block;
-            margin-right: 4px;
-            margin-bottom: 10px;
-        }
-
-        .tags li a{
-            font-size: 11px;
-            line-height: 13px;
-            color: #000;
-            padding: 2px 5px;
-            border-radius: 2px;
-            box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.05);
-            border: 1px solid #000;
         }
 
         .tags li a:before{
             content: '#';
         }
 
-        article .post-meta {
+        .post-cover ul{
             position: relative;
-            min-height: 146px;
-            overflow: hidden;
-            border-radius: 5px 5px 0 0;
-            font-size: 0;
+            z-index: 5;
+            display: block;
+            width: 100%;
+            text-align: center;
         }
 
-        article .tags {
-            position: absolute;
-            margin-bottom: 25px;
+        .post-cover ul li{
             display: inline-block;
-            max-width: calc(100% - 50px);
-            top: 15px;
-            left: 15px;
-            z-index: 2;
-            margin-bottom: 0;
+            margin-right: 10px;
         }
 
-        article .tags li a {
-            color: #FFFFFF;
-            border: 1px solid #FFFFFF;
-        }
-
-        article .tags a:hover {
-            background: #fff;
-            color: #000;
-        }
-
-        .content-inner article .post-meta .post-date {
-            left: 15px;
-            bottom: 10px;
-            font-size: 14px;
-            line-height: 20px;
-        }
-
-        article .post-meta .post-date {
-            font-size: 14px;
-            line-height: 25px;
-            position: absolute;
-            left: 25px;
-            bottom: 15px;
+        .post-cover ul li a{
             color: #fff;
-            z-index: 2;
+            text-transform: lowercase;
+            border: none;
         }
 
-        .kg-card-markdown{
-            padding: 10px 15px;
+        .post-cover time{
+            position: relative;
+            z-index: 5;
+            padding: 30px;
+            display: block;
+            width: 80%;
+            text-align: center;
         }
 
         .content-inner article .post-meta:not(.has-image){
@@ -926,7 +933,10 @@
     <main class="content content-inner" role="main">
         <article class="post">
 
-            <div class="post-meta {{#if feature_image}}has-image{{/if}}">
+            <div class="post-meta post-cover {{#if feature_image}}has-image{{/if}}">
+                <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
+                <h1 class="post-title">{{title}}</h1>
+                <div class="tags-container">
                 {{#if tags}}
                     <ul class="tags">
                     {{#foreach tags limit="5"}}
@@ -936,10 +946,10 @@
                     {{/foreach}}
                     </ul>
                 {{/if}}
+                </div>
                 {{#if feature_image}}
                     <amp-img src="{{img_url feature_image absolute="true"}}" width="600" height="400" layout="responsive"></amp-img>
                 {{/if}}
-                <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
             </div>
             <section class="post-content">
 

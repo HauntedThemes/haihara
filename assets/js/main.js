@@ -15,6 +15,8 @@ jQuery(document).ready(function($) {
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
         h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
+    // Featured posts slider
+
     if ($('.featured-slider').length) {
         var swiperFeatured = new Swiper('.featured-slider .swiper-container', {
             navigation: {
@@ -22,18 +24,27 @@ jQuery(document).ready(function($) {
                 prevEl: '.featured-slider .swiper-button-prev',
             },
             spaceBetween: 100,
-            // autoplay: {
-            //     delay: 5000,
-            //     disableOnInteraction: false
-            // },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false
+            },
         });
 
+        var countFeatured = $('.featured-navigation li').length;
+
         swiperFeatured.on('slideChange', function(event) {
-            $('.featured-navigation li').removeClass('active');
-            $('.featured-navigation li:nth-child('+ (swiperFeatured.activeIndex+1) +')').addClass('active');
+            var activeIndex = swiperFeatured.activeIndex+1;
+            var nextIndex = swiperFeatured.activeIndex+2;
+            $('.featured-navigation li').removeClass('active next');
+            if (countFeatured == activeIndex) {
+                nextIndex = 1;
+            };
+            $('.featured-navigation li:nth-child('+ (activeIndex) +')').addClass('active');
+            $('.featured-navigation li:nth-child('+ (nextIndex) +')').addClass('next');
         });
 
         $('.featured-navigation li:first-child').addClass('active');
+        $('.featured-navigation li:nth-child(2)').addClass('next');
 
         $('.featured-navigation li').each(function(index, el) {
             $(this).on('click', function(event) {
@@ -47,6 +58,8 @@ jQuery(document).ready(function($) {
         };
 
     };
+
+    // Recent posts slider
 
     if ($('.recent-slider').length) {
 
@@ -195,20 +208,23 @@ jQuery(document).ready(function($) {
         swiperRecent.appendSlide('<div class="swiper-slide">' + post[0].outerHTML + '</div>');
     }
 
+    // Menu trigger
     $('.nav-trigger').on('click', function(event) {
         event.preventDefault();
         $('body').toggleClass('menu-visible');
     });
-
-    $('.search-trigger').on('click', function(event) {
-        event.preventDefault();
-        $('.search #search-field').focus();
-        $('body').toggleClass('search-visible');
-    });
-
     $('.backdrop, .menu-backdrop').on('click', function(event) {
         event.preventDefault();
         $('body').removeClass('search-visible menu-visible');
+    });
+
+    // Search trigger
+    $('.search-trigger').on('click', function(event) {
+        event.preventDefault();
+        setTimeout(function() {
+            $('.search #search-field').focus();
+        }, 300);
+        $('body').toggleClass('search-visible');
     });
 
     // Initialize ghostHunter - A Ghost blog search engine
@@ -227,12 +243,6 @@ jQuery(document).ready(function($) {
                 $('.search-results .title:not(.active)').prependTo('.search-slider').addClass('active');
 
                 var resultsCount = $('#results li').length;
-                var slidesPerView = 5;
-                var slidesPerColumn = 3;
-
-                if (resultsCount <= 15) {
-                    slidesPerView = resultsCount / 5;
-                };
 
                 if (resultsCount == 0) {
                     $('<h3 class="title no-posts-found">No posts found</h3>').appendTo('#results');
@@ -240,29 +250,6 @@ jQuery(document).ready(function($) {
                     $('.no-posts-found').remove();
                 };
 
-                // var swiperFeatured = new Swiper('.search-slider .swiper-container', {
-                //     navigation: {
-                //         nextEl: '.search-slider .swiper-button-next',
-                //         prevEl: '.search-slider .swiper-button-prev',
-                //     },
-                //     slidesPerView: 3,
-                //     slidesPerColumn: 3,
-                //     slidesPerGroup: 3,
-                //     spaceBetween: 30,
-                //     pagination: {
-                //         clickable: true,
-                //         el: '.search-slider .swiper-pagination',
-                //     },
-                // });
-                // if (results.length == 0 && $('#search-field').val() != '') {
-                //     $('#results p').addClass('empty');
-                // };
-                // if ($('.search-inner').find('a').length) {
-                //     $('.search-inner a').each(function(index, el) {
-                //         var a = $(this);
-                //         a.html(a.html().replace(/^(\w+)/, '<span>$1</span>'));
-                //     });
-                // };
                 $('#results li').each(function(index, el) {
                     if (index > 14) {
                         $(this).hide();
@@ -273,121 +260,60 @@ jQuery(document).ready(function($) {
         }
     });
 
-    // var CLIENT_ID = '426633516596-6upbjtvbdqvbd8gl2ahee0eof8au5e6c.apps.googleusercontent.com';
-    // var API_KEY = 'v1';
-    // var SCOPES = 'https://www.googleapis.com/auth/analytics.readonly';
-    // var filter = '';
-    // var exclude = [
-    //     '/p/', 
-    //     '/author/',
-    //     '/tag/',
-    //     '(not set)',
-    // ];
-
-    // $.each(exclude, function(index, val) {
-    //     filter += 'ga:landingPagePath!@'+ val +';';
-    // });
-
-    // filter += 'ga:landingPagePath!=/';
-
-    // /**
-    // * Authorize Google Compute Engine API.
-    // */
-    // function authorization() {
-    // gapi.client.setApiKey(API_KEY);
-    // gapi.auth.authorize({
-    //  client_id: CLIENT_ID,
-    //  scope: SCOPES,
-    //  immediate: true
-    // }, function(authResult) {
-    //     if (authResult && !authResult.error) {
-    //       var apiQuery = gapi.client.analytics.data.ga.get({
-    //         'ids': 'ga:160750085',
-    //         'start-date': '30daysAgo',
-    //         'end-date': 'yesterday',
-    //         'metrics': 'ga:entrances',
-    //         'dimensions': 'ga:landingPagePath',
-    //         'sort': '-ga:entrances',
-    //         'filters'    : filter,
-    //         'max-results': 20
-    //       });
-    //       apiQuery.execute(handleCoreReportingResults);
-    //     } else {
-    //       console.log('Auth was not successful');
-    //     }
-    //   }
-    // );
-    // }
-
-    // function handleCoreReportingResults(results) {
-    //   if (!results.error) {
-    //     var check = 0;
-    //     $.each(results.rows, function(index, val) {
-    //         var slug = val[0].substring(1).slice(0,-1);
-    //         slug = slug.replace(/\\/g, '');
-    //         $.get(ghost.url.api('posts'), {filter:"page:false+slug:"+slug}).done(function (data){
-    //             if (data.posts[0] && check < 5) {
-    //                 var viewText = 'views';
-    //                 if (val[1] == 1) { viewText = 'view'; };
-    //                 $('.most-viewed ul').append('<li><p class="views">'+ val[1] + ' ' + viewText + ' </p><a href="' + val[0] + '">' + data.posts[0].title + '</a></li>');
-    //                 check++;
-    //             };
-    //         }).fail(function (err){
-    //           console.log(err);
-    //         });
-    //     });
-    //   } else {
-    //     alert('There was an error: ' + results.message);
-    //   }
-    // }
-
-    // /**
-    // * Driver for sample application.
-    // */
-    // $(window).load(authorization);
-
-    // Progress bar for inner post
-    function progressBar(){
-        var postContentOffsetTop = $('.post-content').offset().top;
-        var postContentHeight = $('.post-content').height();
-        if ($(window).scrollTop() > postContentOffsetTop && $(window).scrollTop() < (postContentOffsetTop + postContentHeight)) {
-            var heightPassed = $(window).scrollTop() - postContentOffsetTop;
-            var percentage = heightPassed * 100/postContentHeight;
-            $('.progress').css({
-                width: percentage + '%'
-            });
-        }else if($(window).scrollTop() < postContentOffsetTop){
-            $('.progress').css({
-                width: '0%'
-            });
-        }else{
-            $('.progress').css({
-                width: '100%'
-            });
-        };
-    }
-
+    // Execute on scroll
     $(window).on('scroll', function(event) {
         if ($('.post-template').length) {
             progressBar();
         };
+
+        // Hide menu and search after scroll
         var top = $(window).scrollTop();
         if (top > (h/1.33)) {
             $('body.menu-visible .backdrop, body.search-visible .backdrop').click();
         };
     });
 
+    // Execute on load
     $(window).on('load', function(event) {
+
+        // Sticky sidebar
         $(".sidebar").stick_in_parent({
             offset_top: 15
         });
+
+        // Sticky infobar
         $(".info-bar").stick_in_parent();
+
+        $('.post-content img').each(function(index, el) {
+            if (!$(this).parent().is("a")) {
+                $( "<a href='" + $(this).attr('src') + "' class='zoom'></a>" ).insertAfter( $(this) );
+                $(this).appendTo($(this).next("a"));
+            };
+        });
+
+        $('.zoom').fluidbox();
+
+        $(window).on('scroll', function(event) {
+            $('.zoom').fluidbox('close');
+        });
+
     });
 
     $(window).on('resize', function(event) {
         w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     });
+
+    // Initialize shareSelectedText
+    if (config['share-selected-text']) {
+        shareSelectedText('.post-template .post-content', {
+            sanitize: true,
+            buttons: [
+                'twitter',
+            ],
+            tooltipTimeout: 250
+        });
+    };
 
     // Initialize Disqus comments
     if ($('#content').attr('data-id') && config['disqus-shortname'] != '') {
@@ -421,6 +347,7 @@ jQuery(document).ready(function($) {
 
     };
 
+    // Infinite scroll
     var currentPage = 1;
     var pathname = window.location.pathname;
     var $document = $(document);
@@ -555,11 +482,11 @@ jQuery(document).ready(function($) {
         infiniteScroll();
     };
 
-
-    $('.dsq-widget-list').each(function(index, el) {
+    // Hide widget if no posts
+    $('.widget').each(function(index, el) {
         var count = $(this).find('li').length;
         if (count == 0) {
-            $(this).parent().remove();
+            $(this).remove();
         };
     });
 
@@ -580,5 +507,26 @@ jQuery(document).ready(function($) {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
     } 
+
+    // Progress bar for inner post
+    function progressBar(){
+        var postContentOffsetTop = $('.post-content').offset().top;
+        var postContentHeight = $('.post-content').height();
+        if ($(window).scrollTop() > postContentOffsetTop && $(window).scrollTop() < (postContentOffsetTop + postContentHeight)) {
+            var heightPassed = $(window).scrollTop() - postContentOffsetTop;
+            var percentage = heightPassed * 100/postContentHeight;
+            $('.progress').css({
+                width: percentage + '%'
+            });
+        }else if($(window).scrollTop() < postContentOffsetTop){
+            $('.progress').css({
+                width: '0%'
+            });
+        }else{
+            $('.progress').css({
+                width: '100%'
+            });
+        };
+    }
 
 });
