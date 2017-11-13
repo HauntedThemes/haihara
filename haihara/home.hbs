@@ -66,30 +66,32 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-8">
-                {{#get "tags" limit="all"}}
+                {{#get "tags" limit="all" include="count.posts"}}
                     {{#foreach tags}}
-                        <h3 class="title">{{name}}</h3>
-                        <a href="{{url}}" class="view-all">View all</a>
-                        <div class="row loop-big">
-                            <div class="col-md-12">
-                                {{#get "posts" limit="1" include="author,tags" filter="tag:{{slug}}"}}
+                        {{#if count.posts}}
+                            <h3 class="title">{{name}}</h3>
+                            <a href="{{url}}" class="view-all">View all</a>
+                            <div class="row loop-big">
+                                <div class="col-md-12">
+                                    {{#get "posts" limit="1" include="author,tags" filter="tag:{{slug}}"}}
+                                        {{#foreach posts}}
+                                            {{> "loop-big"}}
+                                        {{/foreach}}
+                                    {{/get}}
+                                </div>
+                            </div>
+                            {{#get "posts" limit="7" filter="tag:{{slug}}"}}
+                                <div class="row loop-small">
                                     {{#foreach posts}}
-                                        {{> "loop-big"}}
+                                        {{^if @first}}
+                                        <div class="col-md-4 col-sm-6">
+                                            {{> "loop-small"}}
+                                        </div>
+                                        {{/if}}
                                     {{/foreach}}
-                                {{/get}}
-                            </div>
-                        </div>
-                        {{#get "posts" limit="7" filter="tag:{{slug}}"}}
-                            <div class="row loop-small">
-                                {{#foreach posts}}
-                                    {{^if @first}}
-                                    <div class="col-md-4 col-sm-6">
-                                        {{> "loop-small"}}
-                                    </div>
-                                    {{/if}}
-                                {{/foreach}}
-                            </div>
-                        {{/get}}
+                                </div>
+                            {{/get}}
+                        {{/if}}
                     {{/foreach}}
                 {{/get}}
             </div>

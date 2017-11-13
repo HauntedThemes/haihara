@@ -360,7 +360,6 @@ input::-ms-clear {
 }
 
 .btn:hover{
-    background: #2c0fd2;
     color: #fff;
 }
 
@@ -1391,6 +1390,7 @@ body.search-visible .nav-trigger{
     background: #fff;
     padding: 60px 67px;
     position: relative;
+    z-index: 1;
 }
 
 .post-content h1,
@@ -1408,11 +1408,15 @@ body.search-visible .nav-trigger{
 }
 
 .post-content a{
-    border-bottom: 1px solid #0025C8;
+    border-bottom: 2px solid #0025C8;
 }
 
 .post-content a:hover{
-    border-bottom: 1px solid #FB0007;
+    border-bottom: 2px solid #FB0007;
+}
+
+.post-content a.btn:hover{
+    border-bottom: 2px solid #0025C8;
 }
 
 .post-content .info-bar{
@@ -1794,8 +1798,11 @@ body.search-visible .nav-trigger{
     line-height: 21px;
 }
 
+.author .author-meta a:hover{
+    color: #FB0007;
+}
+
 .author .author-meta a i{
-    color: #0025C8;
     font-size: 14px;
 }
 
@@ -2172,6 +2179,34 @@ body.search-visible .nav-trigger{
     background: #f0f0f0;
 }
 
+.subscribe .social {
+    margin-top: 20px;
+}
+
+.subscribe .social a{
+    font-size: 20px;
+    padding: 5px;
+    margin: 0 5px;
+    border: none;
+}
+
+.subscribe h1{
+    margin-top: 0;
+}
+
+.subscribe .post-content{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.subscribe .or{
+    margin: 50px 0;
+}
+
 @-webkit-keyframes shake {
     8%, 41% {
         -webkit-transform: translateX(-10px);
@@ -2258,11 +2293,23 @@ footer form button[type="submit"], .gh-signin button[type="submit"]{
     right: 15px;
 }
 
-footer form button[type="submit"]:before, .gh-signin button[type="submit"]:before{
+footer form button[type="submit"]:after, .gh-signin button[type="submit"]:after{
     font-family: "FontAwesome";
     content: "\f061";
     font-size: 12px;
     color: #2c0fd2;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+footer form button[type="submit"]:hover:after, .gh-signin button[type="submit"]:hover:after{
+    color: #FB0007;
+}
+
+footer form button[type="submit"]:before, .gh-signin button[type="submit"]:before{
+    display: none;
 }
 
 @media (max-width: 1199px) {

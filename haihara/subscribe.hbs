@@ -10,22 +10,16 @@
 </head>
 <body class="subscribe">
 
-    <div class="main-container">
-        <header>
-            <a href="{{@blog.url}}" class="back" title="Back"></a>
-        </header>
-    </div>
-
     <main id="content" class="container content-inner" role="main">
         <article class="{{post_class}}">
-            <h1 class="post-title">
-                {{^if success}}
-                    Subscribe to {{@blog.title}}
-                {{else}}
-                    Subscribed!
-                {{/if}}
-            </h1>
-            <section class="post-content">
+            <section class="post-content text-center">
+                <h1 class="post-title">
+                    {{^if success}}
+                        Subscribe to {{@blog.title}}
+                    {{else}}
+                        Subscribed!
+                    {{/if}}
+                </h1>
                 {{^if success}}
                     {{subscribe_form
                         form_class="gh-signin"
@@ -40,6 +34,19 @@
                         with the email address <em>{{email}}</em>.
                     </p>
                 {{/if}}
+                <div class="social">
+                    {{#if @blog.facebook}}
+                        <a href="{{facebook_url}}" class="facebook" title="{{@blog.facebook}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    {{/if}}
+                    {{#if @blog.twitter}}
+                        <a href="{{twitter_url}}" class="twitter" title="{{@blog.twitter}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    {{/if}}
+                    <a href="https://www.youtube.com/" class="youtube" title="Youtube" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/" class="instagram" title="Instagram" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    <a href="{{@blog.url}}/rss"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                </div>
+                <span class="or">or</span>
+                <a href="{{@blog.url}}" class="btn" title="Back">Return to main page</a>
             </section>
         </article>
     </main>

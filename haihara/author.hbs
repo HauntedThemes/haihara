@@ -43,12 +43,39 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <div class="loop-medium">
-                    {{#foreach posts}}
-                        {{> "loop-medium"}}
-                    {{/foreach}}
-                </div>
-                {{pagination}}
+                {{#if posts}}
+                    <div class="loop-medium">
+                        {{#foreach posts}}
+                            {{> "loop-medium"}}
+                        {{/foreach}}
+                    </div>
+                    {{pagination}}
+                {{else}}
+                    <h2>{{author.name}} has no posts written.</h2>
+                    <div class="related-posts">
+                        {{#get "posts" limit="1" include="tags" filter="author:-{{author.slug}}"}}
+                            <h3 class="title">You might like something else</h3>
+                            <div class="row loop-big">
+                                <div class="col-md-12">
+                                    {{#foreach posts}}
+                                        {{> "loop-big"}}
+                                    {{/foreach}}
+                                </div>
+                            </div>
+                        {{/get}}
+                        {{#get "posts" limit="7" include="tags" filter="author:-{{author.slug}}"}}
+                            <div class="row loop-small">
+                                {{#foreach posts}}
+                                    {{^if @first}}
+                                    <div class="col-md-4">
+                                        {{> "loop-small"}}
+                                    </div>
+                                    {{/if}}
+                                {{/foreach}}
+                            </div>
+                        {{/get}}
+                    </div>
+                {{/if}}
             </div>
             <div class="col-md-4">
                 {{> "sidebar"}}
