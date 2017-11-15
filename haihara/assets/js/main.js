@@ -9,7 +9,7 @@ jQuery(document).ready(function($) {
         'load-more': true,
         'infinite-scroll': false,
         'infinite-scroll-step': 3,
-        'disqus-shortname': 'hauntedthemes-demo'
+        'disqus-shortname': 'hauntedthemes-haihara'
     };
 
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),

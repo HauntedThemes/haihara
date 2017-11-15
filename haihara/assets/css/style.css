@@ -1314,6 +1314,7 @@ body.search-visible .nav-trigger{
 
 .page-template .post-cover{
     justify-content: center;
+    min-height: 300px;
 }
 
 .post-cover-container{
@@ -2490,6 +2491,9 @@ footer form button[type="submit"]:before, .gh-signin button[type="submit"]:befor
     }
     .post-content{
         padding: 25px;
+    }
+    .page-template .post-cover{
+        min-height: 200px;
     }
     .post-cover{
         min-height: 400px;
