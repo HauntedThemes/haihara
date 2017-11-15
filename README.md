@@ -1,4 +1,4 @@
-Leap by Haunted Themes
+Haihara by Haunted Themes
 ============================
 
 > Copyright (C) 2017, HauntedThemes SRL
@@ -9,5 +9,5 @@ our awesome Ghost Themes.
 
 https://www.hauntedthemes.com/
 
-# leap
-If you're into fashion, design, architecture or simply want something pinterestian, there's no doubt about one thing - this theme is specially tileored for you.
+# haihara
+If you are a busy publisher we are pleased to inform that this theme is a little monster that feeds on content for lunch, supper and dinner. You have been warned...

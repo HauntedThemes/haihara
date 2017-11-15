@@ -7,8 +7,8 @@ jQuery(document).ready(function($) {
     var config = {
         'share-selected-text': true,
         'load-more': true,
-        'infinite-scroll': true,
-        'infinite-scroll-step': 1,
+        'infinite-scroll': false,
+        'infinite-scroll-step': 3,
         'disqus-shortname': 'hauntedthemes-demo'
     };
 
@@ -268,7 +268,7 @@ jQuery(document).ready(function($) {
 
         // Hide menu and search after scroll
         var top = $(window).scrollTop();
-        if (top > (h/1.33)) {
+        if (top > (h/1.5)) {
             $('body.menu-visible .backdrop, body.search-visible .backdrop').click();
         };
     });
