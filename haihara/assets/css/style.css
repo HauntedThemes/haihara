@@ -679,6 +679,10 @@ header .menu-container ul li a{
     display: inline-block;
 }
 
+header .menu-container ul li a:hover{
+    color: #FB0007;
+}
+
 header .menu-container .social{
     padding: 30px 0;
 }
@@ -688,6 +692,10 @@ header .menu-container .social a{
     font-size: 20px;
     padding: 5px;
     margin: 0 5px;
+}
+
+header .menu-container .social a:hover{
+    color: #FB0007;
 }
 
 header .search-results{
