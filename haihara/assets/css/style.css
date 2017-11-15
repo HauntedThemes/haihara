@@ -1927,6 +1927,7 @@ body.search-visible .nav-trigger{
 
 .widget ul li:hover{
     padding-left: 30px;
+    padding-right: 20px;
 }
 
 .most-viewed ul li p{
