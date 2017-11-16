@@ -964,6 +964,7 @@ body.search-visible .nav-trigger{
 
 .featured-slider .swiper-container .swiper-slide{
     opacity: 0;
+    pointer-events: none;
     -webkit-transition: opacity 0.3s ease-in-out;
     -moz-transition: opacity 0.3s ease-in-out;
     -o-transition: opacity 0.3s ease-in-out;
@@ -2322,6 +2323,61 @@ footer form button[type="submit"]:before, .gh-signin button[type="submit"]:befor
     display: none;
 }
 
+.go-top{
+    background-image: none;
+    width: 38px;
+    height: 38px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    border: 2px solid #0025C8;
+    color: #0025C8;
+    margin: 0;
+    background: transparent;
+    overflow: hidden;
+    text-align: center;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.go-top.active{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.go-top:before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #2c0fd2;
+    z-index: -1;
+    transform: translateY(-100%);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.go-top:hover{
+    color: #fff;
+}
+
+.go-top:hover:before{
+    transform: translateY(0);
+}
+
+.go-top i {
+    margin-top: -2px;
+}
+
 @media (max-width: 1199px) {
     header .search{
         width: 376px;
@@ -2534,5 +2590,8 @@ footer form button[type="submit"]:before, .gh-signin button[type="submit"]:befor
     }
     footer h3{
         margin-top: 45px;
+    }
+    .go-top{
+        display: none;
     }
 }

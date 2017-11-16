@@ -271,6 +271,14 @@ jQuery(document).ready(function($) {
         if (top > (h/1.5)) {
             $('body.menu-visible .backdrop, body.search-visible .backdrop').click();
         };
+
+        if (top > 0) {
+            if (!$('.go-top').hasClass('active')) {
+                $('.go-top').addClass('active');
+            };
+        }else{
+            $('.go-top').removeClass('active');
+        };
     });
 
     // Execute on load
@@ -528,5 +536,11 @@ jQuery(document).ready(function($) {
             });
         };
     }
+
+    // Go to top
+    $('.go-top').on('click', function(event) {
+        event.preventDefault();
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+    });
 
 });
