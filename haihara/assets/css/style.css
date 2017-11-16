@@ -976,6 +976,7 @@ body.search-visible .nav-trigger{
 }
 
 .featured-slider .swiper-container .swiper-slide-active{
+    pointer-events: auto;
     opacity: 1;
 }
 
