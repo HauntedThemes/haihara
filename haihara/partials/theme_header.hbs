@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-md-8 nopadding text-right">
                         <form class="search">
-                            <input id="search-field" placeholder="Search" autocomplete="off"/>
+                            <input id="search-field" placeholder="{{t "Search"}}" autocomplete="off"/>
                             <a href="#" class="search-trigger"><i class="fa fa-search" aria-hidden="true"></i></a>
                         </form>
                     </div>
@@ -31,14 +31,14 @@
                     {{navigation}}
                     <div class="social">
                         {{#if @blog.facebook}}
-                            <a href="{{facebook_url}}" class="facebook" title="{{@blog.facebook}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="{{facebook_url}}" class="facebook" title="{{@blog.facebook}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
                         {{/if}}
                         {{#if @blog.twitter}}
-                            <a href="{{twitter_url}}" class="twitter" title="{{@blog.twitter}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="{{twitter_url}}" class="twitter" title="{{@blog.twitter}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
                         {{/if}}
-                        <a href="https://www.youtube.com/" class="youtube" title="Youtube" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a>
-                        <a href="https://www.instagram.com/" class="instagram" title="Instagram" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                        <a href="{{@blog.url}}/rss"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                        <a href="https://www.youtube.com/" class="youtube" title="{{@blog.title}} - {{t "YouTube"}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/" class="instagram" title="{{@blog.title}} - {{t "Instagram"}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="{{@blog.url}}/rss" title="{{@blog.title}} - {{t "RSS Feed"}}"><i class="fa fa-rss" aria-hidden="true"></i></a>
                     </div>
                     <a href="#" class="nav-trigger">
                         <i class="fa fa-bars" aria-hidden="true"></i>

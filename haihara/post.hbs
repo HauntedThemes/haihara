@@ -40,8 +40,8 @@
                             <div class="info-bar">
                                 <h4>{{title}}</h4>
                                 <div class="social">
-                                    <a class="twitter" href="https://twitter.com/intent/tweet/?text={{title}}&url={{@blog.url}}{{url}}" target="_blank" title="Share on Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{@blog.url}}{{url}}" target="_blank" title="Share on Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a class="twitter" href="https://twitter.com/intent/tweet/?text={{encode title}}&url={{url absolute="true"}}" target="_blank" title="{{t "Share on Twitter"}}"><i class="fab fa-twitter"></i></a>
+                                    <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}" target="_blank" title="{{t "Share on Facebook"}}"><i class="fab fa-facebook-f"></i></a>
                                 </div>
                                 <div class="progress"></div>
                             </div>
@@ -56,8 +56,8 @@
                         </div>
 
                         <div class="related-posts">
-                            {{#get "posts" limit="1" include="tags" filter="id:-{{comment_id}}+tag:{{primary_tag.slug}}"}}
-                                <h3 class="title">You might also like</h3>
+                            {{#get "posts" limit="1" include="tags, authors" filter="id:-{{id}}+tag:{{primary_tag.slug}}"}}
+                                <h3 class="title">{{t "You might also like"}}</h3>
                                 <div class="row loop-big">
                                     <div class="col-md-12">
                                         {{#foreach posts}}
@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                             {{/get}}
-                            {{#get "posts" limit="7" include="tags" filter="id:-{{comment_id}}+tag:{{primary_tag.slug}}"}}
+                            {{#get "posts" limit="7" include="tags" filter="id:-{{id}}+tag:{{primary_tag.slug}}"}}
                                 <div class="row loop-small">
                                     {{#foreach posts}}
                                         {{^if @first}}

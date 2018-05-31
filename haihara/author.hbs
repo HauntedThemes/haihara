@@ -22,15 +22,15 @@
                             {{#if bio}}
                                 <p>{{bio}}</p>
                             {{else}}
-                                <p>Read <a href="{{url}}">more posts</a> by this author.</p>
+                                <p>{{{t "Read <a href='{url}'>more posts</a> by this author" url=(url)}}}.</p>
                             {{/if}}
 
                             <div class="author-meta">
                                 {{#if website}}<span class="author-link"><a href="{{website}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-link" aria-hidden="true"></i> {{website}}</a></span>{{/if}}
                                 {{#if location}}<span class="author-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{location}}</span>{{/if}}
                                 <span class="social">
-                                    {{#if twitter}}<a href="{{twitter_url}}" class="twitter" title="{{twitter}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>{{/if}}
-                                    {{#if facebook}}<a href="{{facebook_url}}" class="facebook" title="{{facebook}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>{{/if}}
+                                    {{#if twitter}}<a href="{{twitter_url}}" class="twitter" title="{{twitter}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter" aria-hidden="true"></i></a>{{/if}}
+                                    {{#if facebook}}<a href="{{facebook_url}}" class="facebook" title="{{facebook}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>{{/if}}
                                 </span>
                             </div>
                         </div>
@@ -51,10 +51,10 @@
                     </div>
                     {{pagination}}
                 {{else}}
-                    <h2>{{author.name}} has no posts written.</h2>
+                    <h2>{{{t "{name} has no posts written" name=author.name}}}.</h2>
                     <div class="related-posts">
                         {{#get "posts" limit="1" include="tags" filter="author:-{{author.slug}}"}}
-                            <h3 class="title">You might like something else</h3>
+                            <h3 class="title">{{t "You might like something else"}}</h3>
                             <div class="row loop-big">
                                 <div class="col-md-12">
                                     {{#foreach posts}}

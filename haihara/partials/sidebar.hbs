@@ -1,48 +1,42 @@
 <div class="sidebar">
     {{#is "post"}}
         {{!-- Everything inside the #author tags pulls data from the author --}}
-        {{#author}}
-            <section class="author">
-                {{#if profile_image}}
-                <figure class="author-image">
-                    <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
-                </figure>
-                {{/if}}
-
-                <div class="author-content">
-                    <h4>
-                        <a href="{{url}}">{{name}}</a>
-                    </h4>
-
-                    {{#if bio}}
-                        <p>{{bio}}</p>
-                    {{else}}
-                        <p>Read <a href="{{url}}">more posts</a> by this author.</p>
+        {{#if authors}}
+            {{#foreach authors}}
+                <section class="author">
+                    {{#if profile_image}}
+                    <figure class="author-image">
+                        <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
+                    </figure>
                     {{/if}}
 
-                    <div class="author-meta">
-                        {{#if website}}<span class="author-link"><a href="{{website}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-link" aria-hidden="true"></i> {{website}}</a></span>{{/if}}
-                        {{#if location}}<span class="author-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{location}}</span>{{/if}}
-                        <span class="social">
-                            {{#if twitter}}<a href="{{twitter_url}}" class="twitter" title="{{twitter}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>{{/if}}
-                            {{#if facebook}}<a href="{{facebook_url}}" class="facebook" title="{{facebook}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>{{/if}}
-                        </span>
+                    <div class="author-content">
+                        <h4>
+                            <a href="{{url}}">{{name}}</a>
+                        </h4>
+
+                        {{#if bio}}
+                            <p>{{bio}}</p>
+                        {{else}}
+                            <p>{{{t "Read <a href='{url}'>more posts</a> by this author" url=(url)}}}.</p>
+                        {{/if}}
+
+                        <div class="author-meta">
+                            {{#if website}}<span class="author-link"><a href="{{website}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-link" aria-hidden="true"></i> {{website}}</a></span>{{/if}}
+                            {{#if location}}<span class="author-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{location}}</span>{{/if}}
+                            <span class="social">
+                                {{#if twitter}}<a href="{{twitter_url}}" class="twitter" title="{{twitter}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter" aria-hidden="true"></i></a>{{/if}}
+                                {{#if facebook}}<a href="{{facebook_url}}" class="facebook" title="{{facebook}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>{{/if}}
+                            </span>
+                        </div>
                     </div>
-                </div>
-            </section>
-        {{/author}}
+                </section>
+            {{/foreach}}
+        {{/if}}
     {{/is}}
 
-    <div class="widget latest-comments">
-        <h3>Latest comments</h3>
-        <script type="text/javascript" src="//hauntedthemes-haihara.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=1&excerpt_length=100"></script>
-    </div>
-    <div class="widget popular-threads">
-        <h3>Popular threads</h3>
-        <script type="text/javascript" src="//hauntedthemes-haihara.disqus.com/popular_threads_widget.js?num_items=5"></script>
-    </div>
     <div class="widget top-authors">
-        <h3>Top authors</h3>
+        <h3>{{t "Top authors"}}</h3>
         {{#get "users" limit="6" include="count.posts" order="count.posts desc"}}
             <ul>
                 {{#foreach users}}
@@ -61,5 +55,23 @@
                 {{/foreach}}
             </ul>
         {{/get}}
+    </div>
+    <div class="widget top-tags">
+        <h3>{{t "Top tags"}}</h3>
+        {{#get "tags" limit="5" include="count.posts" order="count.posts desc"}}
+            <ul class="tags">
+                {{#foreach tags}}
+                    {{#if count.posts}}
+                        <li>
+                            <a href="{{url}}">{{name}} <i>{{t "{total} posts" total=count.posts}}</i></a>
+                        </li>
+                    {{/if}}
+                {{/foreach}}
+            </ul>
+        {{/get}}
+    </div>
+    <div class="widget ads">
+        <h3>{{t "Advertisement"}}</h3>
+        <div class="ads-container">{{t "Your ad here"}}</div>
     </div>
 </div>

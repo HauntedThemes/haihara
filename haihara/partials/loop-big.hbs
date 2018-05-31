@@ -4,18 +4,20 @@
             <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
             <div class="title-holder">
                 <h2 class="post-title"><a href="{{url}}" title="{{title}}">{{title}}</a></h2>
-                {{#author}}
-                    {{#if profile_image}}
-                        <figure class="author-image">
-                            <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
-                        </figure>
-                    {{/if}}
-                {{/author}}
+                {{#if authors}}
+                    {{#foreach authors limit="1"}}
+                        {{#if profile_image}}
+                            <figure class="author-image">
+                                <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
+                            </figure>
+                        {{/if}}
+                    {{/foreach}}
+                {{/if}}
             </div>
             <p>
                 {{excerpt words="100"}}
             </p>
-            <a href="{{url}}" title="{{title}}" class="read-more">Read more</a>
+            <a href="{{url}}" title="{{title}}" class="read-more">{{t "Read more"}}</a>
         </div>
         {{#if feature_image}}
         <div class="img-holder">

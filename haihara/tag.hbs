@@ -22,10 +22,10 @@
 					</div>
 					{{pagination}}
 				{{else}}
-					<h2>There are no posts in {{tag.name}}.</h2>
+					<h2>{{t "There are no posts in {name}" name=tag.name}}.</h2>
                     <div class="related-posts">
                         {{#get "posts" limit="1" include="tags" filter="tag:-{{tag.slug}}"}}
-                            <h3 class="title">You might like something else</h3>
+                            <h3 class="title">{{t "You might like something else"}}</h3>
                             <div class="row loop-big">
                                 <div class="col-md-12">
                                     {{#foreach posts}}
