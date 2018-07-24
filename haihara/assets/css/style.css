@@ -232,12 +232,16 @@ code{
     color: #333333;
 }
 
+figure{
+    margin: 0;
+}
+
 pre{
     font-family: 'Fira Mono', monospace;
     background-color: #f1f1f1;
     display: block;
     border: 1px solid #cccccc;
-    padding: 22px 25px;
+    padding: 12px 15px;
     font-size: 14px;
     line-height: 25px;
     white-space: pre;
@@ -1523,6 +1527,26 @@ body.search-visible .nav-trigger{
     color: #fff;
 }
 
+.post-content .kg-width-full{
+    margin-left: -67px;
+    width: calc(100% + 134px);
+}
+
+.post-content .kg-width-full figcaption{
+    margin: 0 67px;
+}
+
+.post-content figcaption{
+    padding: 10px 15px;
+    font-size: 14px;
+    border-bottom: 1px solid #0025c8;
+}
+
+.post-content iframe[src*="https://www.youtube.com/"] {
+    height: calc(596px / 1.77777778) !important;
+    width: 100% !important;
+}
+
 .comments {
     padding: 0 0 50px 0;
     margin-top: -30px;
@@ -1548,6 +1572,10 @@ body.search-visible .nav-trigger{
     -moz-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+}
+
+.comments .comments-trigger.z-index-0{
+    z-index: 0;
 }
 
 .comments .comments-trigger:before{

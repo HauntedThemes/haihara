@@ -132,6 +132,10 @@ jQuery(document).ready(function($) {
                 };
 
                 $('#results li').each(function(index, el) {
+                    moment.locale('ro')
+                    var date = $(this).find('time').text();
+                    date = moment(date, "D MMMM YYYY").format('D MMMM YYYY');
+                    $(this).find('time').text(date);
                     if (index > 14) {
                         $(this).hide();
                     };
@@ -180,7 +184,14 @@ jQuery(document).ready(function($) {
             };
         });
 
-        $('.zoom').fluidbox();
+        $('.zoom')
+        .on('openstart.fluidbox', function() {
+            $('.comments-trigger').addClass('z-index-0');
+        })
+        .on('closestart.fluidbox', function() {
+            $('.comments-trigger').removeClass('z-index-0');
+        })
+        .fluidbox();
 
         $(window).on('scroll', function(event) {
             $('.zoom').fluidbox('close');
@@ -191,6 +202,11 @@ jQuery(document).ready(function($) {
     $(window).on('resize', function(event) {
         w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    });
+
+    // Initialize Highlight.js
+    $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
     });
 
     // Initialize shareSelectedText
