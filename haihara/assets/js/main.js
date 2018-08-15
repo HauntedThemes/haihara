@@ -13,7 +13,8 @@ jQuery(document).ready(function($) {
     };
 
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
-        h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
+        lang = $('body').attr('lang');
 
     // Featured posts slider
 
@@ -132,7 +133,7 @@ jQuery(document).ready(function($) {
                 };
 
                 $('#results li').each(function(index, el) {
-                    moment.locale('ro')
+                    moment.locale(lang)
                     var date = $(this).find('time').text();
                     date = moment(date, "D MMMM YYYY").format('D MMMM YYYY');
                     $(this).find('time').text(date);

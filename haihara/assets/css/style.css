@@ -171,13 +171,9 @@ h1, h2, h3, h4, h5, h6{
 
 blockquote{
     margin: 20px 0;
-    font-style: normal;
     position: relative;
     background-color: #0025C8;
-    padding: 10px 30px;
-}
-
-blockquote p{
+    padding: 15px 20px;
     font-size: 27px;
     font-weight: 200;
     line-height: 35px;
@@ -2355,6 +2351,10 @@ footer form button[type="submit"]:before, .gh-signin button[type="submit"]:befor
     header .search{
         width: 376px;
     }
+    .post-content iframe[src*="https://www.youtube.com/"] {
+        height: calc(475px / 1.77777778) !important;
+        width: 100% !important;
+    }
 }
 
 @media (max-width: 991px) {
@@ -2385,6 +2385,10 @@ footer form button[type="submit"]:before, .gh-signin button[type="submit"]:befor
     .tag-template h1.name{
         font-size: 42px;
     }
+    .post-content iframe[src*="https://www.youtube.com/"] {
+        height: calc(556px / 1.77777778) !important;
+        width: 100% !important;
+    }
 }
 
 @media (max-width: 767px) {
@@ -2399,7 +2403,7 @@ footer form button[type="submit"]:before, .gh-signin button[type="submit"]:befor
         font-size: 15px;
         line-height: 21px;
     }
-    blockquote p{
+    blockquote{
         font-size: 19px;
         line-height: 26px;
     }
@@ -2570,5 +2574,35 @@ footer form button[type="submit"]:before, .gh-signin button[type="submit"]:befor
     }
     .go-top{
         display: none;
+    }
+    .post-content iframe[src*="https://www.youtube.com/"] {
+        height: calc(460px / 1.77777778) !important;
+        width: 100% !important;
+    }
+    .post-content .kg-width-full {
+        margin-left: -26px;
+        width: calc(100% + 52px);
+    }
+    .post-content .kg-width-full figcaption {
+        margin: 0 30px;
+    }
+}
+@media (max-width: 575px) {
+    .post-content {
+        padding: 15px;
+    }
+    .post-content .info-bar {
+        margin-left: -15px;
+    }
+    .post-content .kg-width-full {
+        margin-left: -15px;
+        width: calc(100% + 30px);
+    }
+    .post-content .kg-width-full figcaption {
+        margin: 0 15px;
+    }
+    .post-content iframe[src*="https://www.youtube.com/"] {
+        height: calc((100vw - 60px) / 1.77777778) !important;
+        width: 100% !important;
     }
 }
