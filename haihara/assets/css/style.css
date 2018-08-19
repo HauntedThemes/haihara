@@ -1523,12 +1523,14 @@ body.search-visible .nav-trigger{
     color: #fff;
 }
 
-.post-content .kg-width-full{
+.post-content .kg-width-full,
+.post-content .kg-width-wide{
     margin-left: -67px;
     width: calc(100% + 134px);
 }
 
-.post-content .kg-width-full figcaption{
+.post-content .kg-width-full figcaption,
+.post-content .kg-width-wide figcaption{
     margin: 0 67px;
 }
 
@@ -2274,7 +2276,8 @@ footer form button[type="submit"], .gh-signin button[type="submit"]{
 }
 
 footer form button[type="submit"]:after, .gh-signin button[type="submit"]:after{
-    font-family: "FontAwesome";
+    font-family: "Font Awesome\ 5 Free";
+    font-weight: bold;
     content: "\f061";
     font-size: 12px;
     color: #2c0fd2;
@@ -2579,11 +2582,13 @@ footer form button[type="submit"]:before, .gh-signin button[type="submit"]:befor
         height: calc(460px / 1.77777778) !important;
         width: 100% !important;
     }
-    .post-content .kg-width-full {
+    .post-content .kg-width-full,
+    .post-content .kg-width-wide {
         margin-left: -26px;
         width: calc(100% + 52px);
     }
-    .post-content .kg-width-full figcaption {
+    .post-content .kg-width-full figcaption,
+    .post-content .kg-width-wide figcaption {
         margin: 0 30px;
     }
 }
@@ -2594,11 +2599,13 @@ footer form button[type="submit"]:before, .gh-signin button[type="submit"]:befor
     .post-content .info-bar {
         margin-left: -15px;
     }
-    .post-content .kg-width-full {
+    .post-content .kg-width-full,
+    .post-content .kg-width-wide {
         margin-left: -15px;
         width: calc(100% + 30px);
     }
-    .post-content .kg-width-full figcaption {
+    .post-content .kg-width-full figcaption,
+    .post-content .kg-width-wide figcaption {
         margin: 0 15px;
     }
     .post-content iframe[src*="https://www.youtube.com/"] {

@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="related-posts">
-                            {{#get "posts" limit="1" include="tags, authors" filter="id:-{{id}}+tag:{{primary_tag.slug}}"}}
+                            {{#get "posts" limit="1" include="tags, authors" filter="id:-{{id}}+primary_tag:{{primary_tag.slug}}"}}
                                 <h3 class="title">{{t "You might also like"}}</h3>
                                 <div class="row loop-big">
                                     <div class="col-md-12">
@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                             {{/get}}
-                            {{#get "posts" limit="7" include="tags" filter="id:-{{id}}+tag:{{primary_tag.slug}}"}}
+                            {{#get "posts" limit="7" include="tags" filter="id:-{{id}}+primary_tag:{{primary_tag.slug}}"}}
                                 <div class="row loop-small">
                                     {{#foreach posts}}
                                         {{^if @first}}

@@ -379,6 +379,7 @@
             font-style: normal;
             background-color: #0025C8;
             padding: 10px 30px;
+            color: #fff;
 
             -moz-box-sizing: border-box;
         }
@@ -595,6 +596,10 @@
         img{
             display: block;
             max-width: 100%;
+        }
+
+        figure{
+            margin: 30px 0;
         }
 
         /* ==========================================================================
@@ -880,6 +885,12 @@
             text-decoration: none;
         }
 
+        .editor-content figcaption{
+            padding: 10px 15px;
+            font-size: 14px;
+            border-bottom: 1px solid #cccccc;
+        }
+
         /* ==========================================================================
            4. Footer - The bottom the AMP Post
            ========================================================================== */
@@ -957,7 +968,7 @@
             </div>
             <section class="post-content">
 
-                {{amp_content}}
+                <div class="editor-content">{{amp_content}}</div>
 
             </section>
 
@@ -965,7 +976,7 @@
     </main>
     {{/post}}
     <footer class="site-footer clearfix">
-        <section class="copyright"><a href="{{@blog.url}}">{{@blog.title}}</a> &copy; {{date format="YYYY"}}</section>
+        <section class="copyright">{{t "Copyright"}} &copy; {{date format="YYYY"}}, <a href="{{@blog.url}}">{{@blog.title}}</a>. {{t "All Right Reserved"}}.</section>
     </footer>
 </body>
 </html>

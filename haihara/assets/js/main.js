@@ -14,7 +14,8 @@ jQuery(document).ready(function($) {
 
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
         h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
-        lang = $('body').attr('lang');
+        lang = $('body').attr('lang'),
+        monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Sepember", "October", "November", "December"];
 
     // Featured posts slider
 
@@ -133,9 +134,11 @@ jQuery(document).ready(function($) {
                 };
 
                 $('#results li').each(function(index, el) {
-                    moment.locale(lang)
                     var date = $(this).find('time').text();
+                    var dateSplit = date.split(' ')
+                    var month = monthNames.indexOf(dateSplit[1])+1;
                     date = moment(date, "D MMMM YYYY").format('D MMMM YYYY');
+                    date = moment(dateSplit[0]+'-'+month+'-'+dateSplit[2], "DD-MM-YYYY").format('DD MMMM YYYY');
                     $(this).find('time').text(date);
                     if (index > 14) {
                         $(this).hide();

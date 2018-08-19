@@ -20,7 +20,12 @@
                         <div class="col-md-6">
                             <h3>{{t "Social"}}</h3>
                             {{#if @labs.subscribers}}
-                                {{subscribe_form placeholder=(t "Your email address")}}
+                                {{subscribe_form
+                                    form_class="gh-signin"
+                                    input_class="gh-input"
+                                    button_class="gh-btn gh-btn-blue gh-btn-block"
+                                    placeholder=(t "Your email address")
+                                }}
                             {{/if}}
                             <div class="social">
                                 {{#if @blog.facebook}}
