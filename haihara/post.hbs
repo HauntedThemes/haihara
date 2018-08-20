@@ -55,6 +55,7 @@
                             </a>
                         </div>
 
+                        {{#if @labs.publicAPI}}
                         <div class="related-posts">
                             {{#get "posts" limit="1" include="tags, authors" filter="id:-{{id}}+primary_tag:{{primary_tag.slug}}"}}
                                 <h3 class="title">{{t "You might also like"}}</h3>
@@ -78,6 +79,7 @@
                                 </div>
                             {{/get}}
                         </div>
+                        {{/if}}
 
                     </div>
                     <div class="col-lg-4">

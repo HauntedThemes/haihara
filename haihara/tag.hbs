@@ -3,13 +3,16 @@
 
 {{!-- The main content area --}}
 <main id="content" role="main">
+
+    {{#tag}}
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1 class="name">{{tag.name}}</h1>
+				<h1 class="name">{{name}}</h1>
 			</div>
 		</div>
 	</div>
+    {{/tag}}
 
 	<div class="container">
 		<div class="row">
@@ -22,30 +25,32 @@
 					</div>
 					{{pagination}}
 				{{else}}
-					<h2>{{t "There are no posts in {name}" name=tag.name}}.</h2>
-                    <div class="related-posts">
-                        {{#get "posts" limit="1" include="tags"}}
-                            <h3 class="title">{{t "You might like something else"}}</h3>
-                            <div class="row loop-big">
-                                <div class="col-md-12">
+                    {{#if @labs.publicAPI}}
+    					<h2>{{t "There are no posts in {name}" name=tag.name}}.</h2>
+                        <div class="related-posts">
+                            {{#get "posts" limit="1" include="tags"}}
+                                <h3 class="title">{{t "You might like something else"}}</h3>
+                                <div class="row loop-big">
+                                    <div class="col-md-12">
+                                        {{#foreach posts}}
+                                            {{> "loop-big"}}
+                                        {{/foreach}}
+                                    </div>
+                                </div>
+                            {{/get}}
+                            {{#get "posts" limit="7" include="tags"}}
+                                <div class="row loop-small">
                                     {{#foreach posts}}
-                                        {{> "loop-big"}}
+                                        {{^if @first}}
+                                        <div class="col-md-4">
+                                            {{> "loop-small"}}
+                                        </div>
+                                        {{/if}}
                                     {{/foreach}}
                                 </div>
-                            </div>
-                        {{/get}}
-                        {{#get "posts" limit="7" include="tags"}}
-                            <div class="row loop-small">
-                                {{#foreach posts}}
-                                    {{^if @first}}
-                                    <div class="col-md-4">
-                                        {{> "loop-small"}}
-                                    </div>
-                                    {{/if}}
-                                {{/foreach}}
-                            </div>
-                        {{/get}}
-                    </div>
+                            {{/get}}
+                        </div>
+                    {{/if}}
 				{{/if}}
 			</div>
             <div class="col-lg-4">

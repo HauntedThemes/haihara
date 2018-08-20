@@ -6,14 +6,17 @@
                             {{#if @blog.logo}} <img src="{{@blog.logo}}" alt="{{@blog.title}}" /> {{else}}{{@blog.title}}{{/if}} 
                         </a>
                     </div>
+                    {{#if @labs.publicAPI}}
                     <div class="col-md-8 nopadding text-right">
                         <form class="search">
                             <input id="search-field" placeholder="{{t "Search"}}" autocomplete="off"/>
                             <a href="#" class="search-trigger"><i class="fa fa-search" aria-hidden="true"></i></a>
                         </form>
                     </div>
+                    {{/if}}
                 </div>
             </div>
+            {{#if @labs.publicAPI}}
             <div class="search-results">
                 <div class="container">
                     <div class="row">
@@ -25,6 +28,7 @@
                     </div>
                 </div>
             </div>
+            {{/if}}
             <div class="menu-container">
                 <span class="menu-backdrop"></span>
                 <div class="menu-content">

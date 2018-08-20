@@ -6,7 +6,7 @@ jQuery(document).ready(function($) {
 
     var config = {
         'share-selected-text': true,
-        'load-more': true,
+        'load-more': false,
         'infinite-scroll': false,
         'infinite-scroll-step': 3,
         'disqus-shortname': 'hauntedthemes-haihara'

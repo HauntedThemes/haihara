@@ -390,6 +390,7 @@ input::-ms-clear {
 
 .main-container{
     overflow: hidden;
+    min-height: 100vh;
 }
 
 .read-more{
