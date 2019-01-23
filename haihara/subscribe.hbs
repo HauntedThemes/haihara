@@ -15,7 +15,7 @@
             <section class="post-content text-center">
                 <h1 class="post-title">
                     {{^if success}}
-                        {{t "Subscribe to {blogtitle}" blogtitle=@blog.title}}
+                        {{t "Subscribe to {blogtitle}" blogtitle=@site.title}}
                     {{else}}
                         {{t "Subscribed!"}}
                     {{/if}}
@@ -30,27 +30,29 @@
                     }}
                 {{else}}
                     <p>
-                        {{t "You've successfully subscribed to"}} <em>{{@blog.title}}</em>
+                        {{t "You've successfully subscribed to"}} <em>{{@site.title}}</em>
                         {{t "with the email address"}} <em>{{email}}</em>.
                     </p>
                 {{/if}}
                 <div class="social">
-                    {{#if @blog.facebook}}
-                        <a href="{{facebook_url}}" class="facebook" title="{{@blog.facebook}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                    {{#if @site.facebook}}
+                        <a href="{{facebook_url}}" class="facebook" title="{{@site.facebook}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
                     {{/if}}
-                    {{#if @blog.twitter}}
-                        <a href="{{twitter_url}}" class="twitter" title="{{@blog.twitter}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                    {{#if @site.twitter}}
+                        <a href="{{twitter_url}}" class="twitter" title="{{@site.twitter}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
                     {{/if}}
-                    <a href="https://www.youtube.com/" class="youtube" title="{{@blog.title}} - {{t "YouTube"}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
-                    <a href="https://www.instagram.com/" class="instagram" title="{{@blog.title}} - {{t "Instagram"}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                    <a href="{{@blog.url}}/rss" title="{{@blog.title}} - {{t "RSS Feed"}}"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                    <a href="https://www.youtube.com/" class="youtube" title="{{@site.title}} - {{t "YouTube"}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/" class="instagram" title="{{@site.title}} - {{t "Instagram"}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="{{@site.url}}/rss" title="{{@site.title}} - {{t "RSS Feed"}}"><i class="fa fa-rss" aria-hidden="true"></i></a>
                 </div>
                 <span class="or">{{t "or"}}</span>
-                <a href="{{@blog.url}}" class="btn" title="Back">{{t "Return to main page"}}</a>
+                <a href="{{@site.url}}" class="btn" title="Back">{{t "Return to main page"}}</a>
             </section>
         </article>
     </main>
 
+    {{!-- Ghost Content API --}}
+    <script type="text/javascript" src="https://unpkg.com/@tryghost/content-api@1.0.0/umd/content-api.min.js"></script>
 
     {{!-- 3rd party scripts --}}
     <script type="text/javascript" src="{{asset "js/libraries.js"}}"></script>
@@ -58,12 +60,11 @@
     {{!-- Remove this comment to make the date in search and bookmarks translatable.
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/locale/{{lang}}.js"></script>
     --}}
-
-    {{!-- Ghost outputs important scripts and data with this tag --}}
-    {{ghost_foot}}
     
     {{!-- The main JavaScript file for Haihara --}}
     <script type="text/javascript" src="{{asset "js/main.js"}}"></script>
 
+    {{!-- Ghost outputs important scripts and data with this tag --}}
+    {{ghost_foot}}
 </body>
 </html>

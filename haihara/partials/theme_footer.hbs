@@ -5,24 +5,22 @@
             <div class="col-md-12">
                 <div class="footer-content">
                     <div class="row">
-                        {{#if @labs.publicAPI}}
-                            {{#get "tags" limit="all" include="count.posts"}}
-                                {{#if tags}}
-                                <div class="col-md-6">
-                                    <h3>{{t "Tags"}}</h3>
-                                    <ul class="tags">
-                                        {{#foreach tags}}
-                                            {{#if count.posts}}
-                                            <li>
-                                                <a href="{{url}}">{{name}}</a>
-                                            </li>
-                                            {{/if}}
-                                        {{/foreach}}
-                                    </ul>
-                                </div>
-                                {{/if}}
-                            {{/get}}
-                        {{/if}}
+                        {{#get "tags" limit="all" include="count.posts"}}
+                            {{#if tags}}
+                            <div class="col-md-6">
+                                <h3>{{t "Tags"}}</h3>
+                                <ul class="tags">
+                                    {{#foreach tags}}
+                                        {{#if count.posts}}
+                                        <li>
+                                            <a href="{{url}}">{{name}}</a>
+                                        </li>
+                                        {{/if}}
+                                    {{/foreach}}
+                                </ul>
+                            </div>
+                            {{/if}}
+                        {{/get}}
                         <div class="col-md-6">
                             <h3>{{t "Social"}}</h3>
                             {{#if @labs.subscribers}}
@@ -34,21 +32,21 @@
                                 }}
                             {{/if}}
                             <div class="social">
-                                {{#if @blog.facebook}}
-                                    <a href="{{facebook_url}}" class="facebook" title="{{@blog.facebook}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                                {{#if @site.facebook}}
+                                    <a href="{{facebook_url}}" class="facebook" title="{{@site.facebook}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
                                 {{/if}}
-                                {{#if @blog.twitter}}
-                                    <a href="{{twitter_url}}" class="twitter" title="{{@blog.twitter}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                                {{#if @site.twitter}}
+                                    <a href="{{twitter_url}}" class="twitter" title="{{@site.twitter}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
                                 {{/if}}
-                                <a href="https://www.youtube.com/" class="youtube" title="{{@blog.title}} - {{t "YouTube"}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
-                                <a href="https://www.instagram.com/" class="instagram" title="{{@blog.title}} - {{t "Instagram"}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                                <a href="{{@blog.url}}/rss" title="{{@blog.title}} - {{t "RSS Feed"}}"><i class="fa fa-rss" aria-hidden="true"></i></a>
+                                <a href="https://www.youtube.com/" class="youtube" title="{{@site.title}} - {{t "YouTube"}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                                <a href="https://www.instagram.com/" class="instagram" title="{{@site.title}} - {{t "Instagram"}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                                <a href="{{@site.url}}/rss" title="{{@site.title}} - {{t "RSS Feed"}}"><i class="fa fa-rss" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <p class="copyright">{{t "Copyright"}} &copy; {{date format="YYYY"}}, <a href="{{@blog.url}}">{{@blog.title}}</a>. {{t "All Right Reserved"}}.</p>
+                            <p class="copyright">{{t "Copyright"}} &copy; {{date format="YYYY"}}, <a href="{{@site.url}}">{{@site.title}}</a>. {{t "All Right Reserved"}}.</p>
                         </div>
                     </div>
                 </div>

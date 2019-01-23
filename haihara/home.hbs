@@ -5,98 +5,92 @@
 <main id="content" role="main">
 
     {{!-- Featured posts slider --}}
-    {{#if @labs.publicAPI}}
-        {{#get "posts" filter="featured:true" limit="4" include="authors,tags"}}
-            {{#if posts}}
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 class="title">{{t "Featured"}}</h3>
-                        <div class="featured-slider">
-                            <div class="swiper-button-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
-                            <div class="swiper-button-next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-                            <div class="swiper-container">
-                                <div class="swiper-wrapper">
-                                    {{#foreach posts}}
-                                        <div class="swiper-slide">
-                                            {{> "loop-big"}}
-                                        </div>
-                                    {{/foreach}} 
-                                </div>
-                            </div>
-                        </div>
-                        <ul class="featured-navigation">
-                            {{#foreach posts}}
-                                <li>{{title}}</li>
-                            {{/foreach}} 
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            {{/if}}
-        {{/get}}
-    {{/if}}
-
-    {{!-- Recent posts slider --}}
-    {{#if @labs.publicAPI}}
+    {{#get "posts" filter="featured:true" limit="4" include="authors,tags"}}
+        {{#if posts}}
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3 class="title">{{t "Recent articles"}}</h3>
-                    <div class="recent-slider loop">
+                    <h3 class="title">{{t "Featured"}}</h3>
+                    <div class="featured-slider">
                         <div class="swiper-button-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
                         <div class="swiper-button-next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
-                                {{#get "posts" limit="12" filter="featured:false"}}
-                                    {{#foreach posts}}
-                                        <div class="swiper-slide">
-                                            {{> "loop"}}
-                                        </div>
-                                    {{/foreach}} 
-                                {{/get}}
+                                {{#foreach posts}}
+                                    <div class="swiper-slide">
+                                        {{> "loop-big"}}
+                                    </div>
+                                {{/foreach}} 
                             </div>
+                        </div>
+                    </div>
+                    <ul class="featured-navigation">
+                        {{#foreach posts}}
+                            <li>{{title}}</li>
+                        {{/foreach}} 
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+    {{/get}}
+
+    {{!-- Recent posts slider --}}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title">{{t "Recent articles"}}</h3>
+                <div class="recent-slider loop">
+                    <div class="swiper-button-prev"><i class="fa fa-angle-left" aria-hidden="true"></i></div>
+                    <div class="swiper-button-next"><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            {{#get "posts" limit="12" filter="featured:false"}}
+                                {{#foreach posts}}
+                                    <div class="swiper-slide">
+                                        {{> "loop"}}
+                                    </div>
+                                {{/foreach}} 
+                            {{/get}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    {{/if}}
+    </div>
 
     {{!-- List all tags and a few recent posts for each tag --}}
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-8">
-                {{#if @labs.publicAPI}}
-                    {{#get "tags" limit="all" include="count.posts" order="count.posts DESC"}}
-                        {{#foreach tags}}
-                            {{#if count.posts}}
-                                <h3 class="title">{{name}}</h3>
-                                <a href="{{url}}" class="view-all">{{t "View all"}}</a>
-                                <div class="row loop-big">
-                                    <div class="col-md-12">
-                                        {{#get "posts" limit="1" include="authors,tags" filter="tag:{{slug}}"}}
-                                            {{#foreach posts}}
-                                                {{> "loop-big"}}
-                                            {{/foreach}}
-                                        {{/get}}
-                                    </div>
-                                </div>
-                                {{#get "posts" limit="7" filter="tag:{{slug}}"}}
-                                    <div class="row loop-small">
+                {{#get "tags" limit="all" include="count.posts" order="count.posts DESC"}}
+                    {{#foreach tags}}
+                        {{#if count.posts}}
+                            <h3 class="title">{{name}}</h3>
+                            <a href="{{url}}" class="view-all">{{t "View all"}}</a>
+                            <div class="row loop-big">
+                                <div class="col-md-12">
+                                    {{#get "posts" limit="1" include="authors,tags" filter="tag:{{slug}}"}}
                                         {{#foreach posts}}
-                                            {{^if @first}}
-                                            <div class="col-md-4 col-sm-6">
-                                                {{> "loop-small"}}
-                                            </div>
-                                            {{/if}}
+                                            {{> "loop-big"}}
                                         {{/foreach}}
-                                    </div>
-                                {{/get}}
-                            {{/if}}
-                        {{/foreach}}
-                    {{/get}}
-                {{/if}}
+                                    {{/get}}
+                                </div>
+                            </div>
+                            {{#get "posts" limit="7" filter="tag:{{slug}}"}}
+                                <div class="row loop-small">
+                                    {{#foreach posts}}
+                                        {{^if @first}}
+                                        <div class="col-md-4 col-sm-6">
+                                            {{> "loop-small"}}
+                                        </div>
+                                        {{/if}}
+                                    {{/foreach}}
+                                </div>
+                            {{/get}}
+                        {{/if}}
+                    {{/foreach}}
+                {{/get}}
             </div>
             <div class="col-lg-4 col-md-12">
                 {{> "sidebar"}}

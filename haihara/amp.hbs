@@ -941,7 +941,7 @@
     {{#post}}
     <header class="main-header">
         <nav class="blog-title">
-            <a href="{{@blog.url}}">{{@blog.title}}</a>
+            <a href="{{@site.url}}">{{@site.title}}</a>
         </nav>
     </header>
 
@@ -963,7 +963,7 @@
                 {{/if}}
                 </div>
                 {{#if feature_image}}
-                    <amp-img src="{{img_url feature_image absolute="true"}}" width="600" height="400" layout="responsive"></amp-img>
+                    <amp-img src="{{img_url feature_image size="m" absolute="true"}}" width="600" height="400" layout="responsive"></amp-img>
                 {{/if}}
             </div>
             <section class="post-content">
@@ -976,7 +976,7 @@
     </main>
     {{/post}}
     <footer class="site-footer clearfix">
-        <section class="copyright">{{t "Copyright"}} &copy; {{date format="YYYY"}}, <a href="{{@blog.url}}">{{@blog.title}}</a>. {{t "All Right Reserved"}}.</section>
+        <section class="copyright">{{t "Copyright"}} &copy; {{date format="YYYY"}}, <a href="{{@site.url}}">{{@site.title}}</a>. {{t "All Right Reserved"}}.</section>
     </footer>
 </body>
 </html>

@@ -8,7 +8,7 @@
                     {{#foreach authors limit="1"}}
                         {{#if profile_image}}
                             <figure class="author-image">
-                                <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
+                                <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image size="xs"}}" alt="{{name}}"></a>
                             </figure>
                         {{/if}}
                     {{/foreach}}
@@ -22,7 +22,7 @@
         {{#if feature_image}}
         <div class="img-holder">
             <a href="{{url}}" title="{{title}}">
-                <span style="background-image: url({{img_url feature_image}})"></span>
+                <span style="background-image: url({{img_url feature_image size="m"}})"></span>
             </a>
             {{#if tags}}
                 <ul class="tags">

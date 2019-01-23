@@ -6,7 +6,7 @@
                 <section class="author">
                     {{#if profile_image}}
                     <figure class="author-image">
-                        <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
+                        <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image size="s"}}" alt="{{name}}"></a>
                     </figure>
                     {{/if}}
 
@@ -35,43 +35,41 @@
         {{/if}}
     {{/is}}
 
-    {{#if @labs.publicAPI}}
-        <div class="widget top-authors">
-            <h3>{{t "Top authors"}}</h3>
-            {{#get "users" limit="6" include="count.posts" order="count.posts desc"}}
-                <ul>
-                    {{#foreach users}}
-                        {{#if count.posts}}
-                            <li class="author">
-                                {{#if profile_image}}
-                                <figure class="author-image">
-                                    <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
-                                </figure>
-                                {{else}}
-                                <a class="no-img" href="{{url}}" title="{{name}}"></a>
-                                {{/if}}
-                                <a href="{{url}}" class="link">{{name}}</a>
-                            </li>
-                        {{/if}}
-                    {{/foreach}}
-                </ul>
-            {{/get}}
-        </div>
-        <div class="widget top-tags">
-            <h3>{{t "Top tags"}}</h3>
-            {{#get "tags" limit="5" include="count.posts" order="count.posts desc"}}
-                <ul class="tags">
-                    {{#foreach tags}}
-                        {{#if count.posts}}
-                            <li>
-                                <a href="{{url}}">{{name}} <i>{{t "{total} posts" total=count.posts}}</i></a>
-                            </li>
-                        {{/if}}
-                    {{/foreach}}
-                </ul>
-            {{/get}}
-        </div>
-    {{/if}}
+    <div class="widget top-authors">
+        <h3>{{t "Top authors"}}</h3>
+        {{#get "users" limit="6" include="count.posts" order="count.posts desc"}}
+            <ul>
+                {{#foreach users}}
+                    {{#if count.posts}}
+                        <li class="author">
+                            {{#if profile_image}}
+                            <figure class="author-image">
+                                <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
+                            </figure>
+                            {{else}}
+                            <a class="no-img" href="{{url}}" title="{{name}}"></a>
+                            {{/if}}
+                            <a href="{{url}}" class="link">{{name}}</a>
+                        </li>
+                    {{/if}}
+                {{/foreach}}
+            </ul>
+        {{/get}}
+    </div>
+    <div class="widget top-tags">
+        <h3>{{t "Top tags"}}</h3>
+        {{#get "tags" limit="5" include="count.posts" order="count.posts desc"}}
+            <ul class="tags">
+                {{#foreach tags}}
+                    {{#if count.posts}}
+                        <li>
+                            <a href="{{url}}">{{name}} <i>{{t "{total} posts" total=count.posts}}</i></a>
+                        </li>
+                    {{/if}}
+                {{/foreach}}
+            </ul>
+        {{/get}}
+    </div>
     <div class="widget ads">
         <h3>{{t "Advertisement"}}</h3>
         <div class="ads-container">{{t "Your ad here"}}</div>

@@ -9,13 +9,21 @@ jQuery(document).ready(function($) {
         'load-more': false,
         'infinite-scroll': false,
         'infinite-scroll-step': 3,
-        'disqus-shortname': 'hauntedthemes-haihara'
+        'disqus-shortname': 'hauntedthemes-haihara',
+        'content-api-host': '',
+        'content-api-key': '',
     };
 
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
         h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
         lang = $('body').attr('lang'),
         monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    var ghostAPI = new GhostContentAPI({
+        host: config['content-api-host'],
+        key: config['content-api-key'],
+        version: 'v2'
+    });
 
     // Featured posts slider
 
@@ -110,42 +118,40 @@ jQuery(document).ready(function($) {
         $('body').toggleClass('search-visible');
     });
 
-    // Initialize ghostHunter - A Ghost blog search engine
-    $("#search-field").ghostHunter({
-        results             : "#results",
-        onKeyUp             : true,
-        zeroResultsInfo     : true,
-        displaySearchInfo   : false,
-        info_template       : "<h3 class='title'>Number of posts found: {{amount}}</h3>",
-        result_template     : "<li class='swiper-slide'><article class='post post-card post-card-small'><div class='content'><div class='content-holder'><time class='post-date' datetime='{{pubDate}}'>{{pubDate}}</time><h3 class='post-title'><a href='{{link}}' title='{{title}}'>{{title}}</a></h3></div></div></article></li>",
-        onComplete      : function( results ){
-            if ($("#search-field").val() == '') {
-                $('.search-results').removeClass('active');
-            }else{
-                $('.search-results').addClass('active');
-                $('.search-results .title:not(.active)').prependTo('.search-slider').addClass('active');
-
-                var resultsCount = $('#results li').length;
-
-                if (resultsCount == 0) {
-                    $('<h3 class="title no-posts-found">No posts found</h3>').appendTo('#results');
+    var ghostSearch = new GhostSearch({
+        host: config['content-api-host'],
+        key: config['content-api-key'],
+        input: '#search-field',
+        results: '#results',
+        options: {
+            limit: 15,
+        },
+        api: {
+            parameters: { 
+                fields: ['title', 'slug', 'published_at'],
+            },
+        },
+        template: function(result) {
+            var dateSplit = result.published_at.split('T');
+            dateSplit = dateSplit[0].split('-');
+            var month = monthNames[dateSplit[1]-1];
+            var date = moment(dateSplit[2]+'-'+month+'-'+dateSplit[1], "DD-MM-YYYY").format('DD MMM YYYY');
+            let url = [location.protocol, '//', location.host].join('');
+            return "<li class='swiper-slide'><article class='post post-card post-card-small'><div class='content'><div class='content-holder'><time class='post-date' datetime='"+ date +"'>"+ date +"</time><h3 class='post-title'><a href='"+ result.slug +"' title='"+ result.title +"'>"+ result.title +"</a></h3></div></div></article></li>";
+        },
+        on: {
+            afterDisplay: function(results){
+                if ($("#search-field").val() == '') {
+                    $('.search-results').removeClass('active');
                 }else{
                     $('.no-posts-found').remove();
-                };
-
-                $('#results li').each(function(index, el) {
-                    var date = $(this).find('time').text();
-                    var dateSplit = date.split(' ')
-                    var month = monthNames.indexOf(dateSplit[1])+1;
-                    date = moment(date, "D MMMM YYYY").format('D MMMM YYYY');
-                    date = moment(dateSplit[0]+'-'+month+'-'+dateSplit[2], "DD-MM-YYYY").format('DD MMMM YYYY');
-                    $(this).find('time').text(date);
-                    if (index > 14) {
-                        $(this).hide();
+                    if(!results.length){
+                        $('<h3 class="title no-posts-found">No posts found</h3>').appendTo('#results');
                     };
-                });
-            };
-
+                    $('.search-results').addClass('active');
+                    $('.search-results .title:not(.active)').prependTo('.search-slider').addClass('active');
+                }
+            },
         }
     });
 

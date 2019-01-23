@@ -10,7 +10,7 @@
                     <section class="author">
                         {{#if profile_image}}
                         <figure class="author-image">
-                            <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
+                            <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image size="xs"}}" alt="{{name}}"></a>
                         </figure>
                         {{/if}}
 
@@ -51,32 +51,30 @@
                     </div>
                     {{pagination}}
                 {{else}}
-                    {{#if @labs.publicAPI}}
-                        <h2>{{{t "{name} has no posts written" name=author.name}}}.</h2>
-                        <div class="related-posts">
-                            {{#get "posts" limit="1" include="tags"}}
-                                <h3 class="title">{{t "You might like something else"}}</h3>
-                                <div class="row loop-big">
-                                    <div class="col-md-12">
-                                        {{#foreach posts}}
-                                            {{> "loop-big"}}
-                                        {{/foreach}}
-                                    </div>
-                                </div>
-                            {{/get}}
-                            {{#get "posts" limit="7" include="tags"}}
-                                <div class="row loop-small">
+                    <h2>{{{t "{name} has no posts written" name=author.name}}}.</h2>
+                    <div class="related-posts">
+                        {{#get "posts" limit="1" include="tags"}}
+                            <h3 class="title">{{t "You might like something else"}}</h3>
+                            <div class="row loop-big">
+                                <div class="col-md-12">
                                     {{#foreach posts}}
-                                        {{^if @first}}
-                                        <div class="col-md-4">
-                                            {{> "loop-small"}}
-                                        </div>
-                                        {{/if}}
+                                        {{> "loop-big"}}
                                     {{/foreach}}
                                 </div>
-                            {{/get}}
-                        </div>
-                    {{/if}}
+                            </div>
+                        {{/get}}
+                        {{#get "posts" limit="7" include="tags"}}
+                            <div class="row loop-small">
+                                {{#foreach posts}}
+                                    {{^if @first}}
+                                    <div class="col-md-4">
+                                        {{> "loop-small"}}
+                                    </div>
+                                    {{/if}}
+                                {{/foreach}}
+                            </div>
+                        {{/get}}
+                    </div>
                 {{/if}}
             </div>
             <div class="col-md-4">

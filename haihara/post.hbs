@@ -10,7 +10,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 post-cover-container">
-                        <div class="post-cover post-meta {{#if feature_image}}has-image{{/if}}" {{#if feature_image}} style="background-image: url({{img_url feature_image}});"{{/if}}>
+                        <div class="post-cover post-meta {{#if feature_image}}has-image{{/if}}" {{#if feature_image}} style="background-image: url({{img_url feature_image size="l"}});"{{/if}}>
                             <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="MMMM D, YYYY"}}</time>
                             <h1 class="post-title">{{title}}</h1>
                             <div class="tags-container">
@@ -32,11 +32,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-
+                        
                         <section class="post-content">
-
                             <div class="editor-content">{{content}}</div>
-
                             <div class="info-bar">
                                 <h4>{{title}}</h4>
                                 <div class="social">
@@ -45,7 +43,6 @@
                                 </div>
                                 <div class="progress"></div>
                             </div>
-
                         </section>
 
                         <div class="comments">
@@ -55,7 +52,6 @@
                             </a>
                         </div>
 
-                        {{#if @labs.publicAPI}}
                         <div class="related-posts">
                             {{#get "posts" limit="1" include="tags, authors" filter="id:-{{id}}+primary_tag:{{primary_tag.slug}}"}}
                                 <h3 class="title">{{t "You might also like"}}</h3>
@@ -79,8 +75,6 @@
                                 </div>
                             {{/get}}
                         </div>
-                        {{/if}}
-
                     </div>
                     <div class="col-lg-4">
                         {{> "sidebar"}}
