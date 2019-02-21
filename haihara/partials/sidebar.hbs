@@ -37,9 +37,9 @@
 
     <div class="widget top-authors">
         <h3>{{t "Top authors"}}</h3>
-        {{#get "users" limit="6" include="count.posts" order="count.posts desc"}}
+        {{#get "authors" limit="6" include="count.posts" order="count.posts desc"}}
             <ul>
-                {{#foreach users}}
+                {{#foreach authors}}
                     {{#if count.posts}}
                         <li class="author">
                             {{#if profile_image}}

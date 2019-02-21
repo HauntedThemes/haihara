@@ -137,7 +137,7 @@ jQuery(document).ready(function($) {
             var month = monthNames[dateSplit[1]-1];
             var date = moment(dateSplit[2]+'-'+month+'-'+dateSplit[1], "DD-MM-YYYY").format('DD MMM YYYY');
             let url = [location.protocol, '//', location.host].join('');
-            return "<li class='swiper-slide'><article class='post post-card post-card-small'><div class='content'><div class='content-holder'><time class='post-date' datetime='"+ date +"'>"+ date +"</time><h3 class='post-title'><a href='"+ result.slug +"' title='"+ result.title +"'>"+ result.title +"</a></h3></div></div></article></li>";
+            return "<li class='swiper-slide'><article class='post post-card post-card-small'><div class='content'><div class='content-holder'><time class='post-date' datetime='"+ date +"'>"+ date +"</time><h3 class='post-title'><a href='/"+ result.slug +"/' title='"+ result.title +"'>"+ result.title +"</a></h3></div></div></article></li>";
         },
         on: {
             afterDisplay: function(results){
