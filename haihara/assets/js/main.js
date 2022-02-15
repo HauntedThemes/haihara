@@ -19,11 +19,11 @@ jQuery(document).ready(function($) {
         lang = $('body').attr('lang'),
         monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    var ghostAPI = new GhostContentAPI({
-        host: config['content-api-host'],
-        key: config['content-api-key'],
-        version: 'v2'
-    });
+    // var ghostAPI = new GhostContentAPI({
+    //     host: config['content-api-host'],
+    //     key: config['content-api-key'],
+    //     version: 'v2'
+    // });
 
     // Featured posts slider
 
