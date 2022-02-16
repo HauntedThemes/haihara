@@ -77,6 +77,18 @@
             "advertise": {
                 "type": "boolean",
                 "default": true
+            },
+            "instagram": {
+                "type": "text",
+                "default": ""
+            },
+            "linkedin": {
+                "type": "text",
+                "default": ""
+            },
+            "youtube": {
+                "type": "text",
+                "default": ""
             }
         }
     }
