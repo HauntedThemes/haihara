@@ -35,7 +35,14 @@
         var maxPages = parseInt('{{pagination.pages}}');
     </script>
     {{/if}}
-
+    <script type="text/javascript">
+        {{#if @custom.api_key }}
+            const apiKey =  "{{ @custom.api_key }}";
+        {{/if}}
+        {{#if @custom.api_host }}
+            const apiHost =  "{{ @custom.api_host }}";
+        {{/if}}
+    </script>
     <script type="text/javascript" src="{{asset "js/main.js"}}"></script>
 
     {{!-- Ghost outputs important scripts and data with this tag --}}

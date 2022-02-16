@@ -10,8 +10,8 @@ jQuery(document).ready(function($) {
         'infinite-scroll': false,
         'infinite-scroll-step': 3,
         'disqus-shortname': 'hauntedthemes-haihara',
-        'content-api-host': '',
-        'content-api-key': '',
+        'content-api-host': (apiHost ? apiHost : ''),
+        'content-api-key': (apiKey ? apiKey : ''),
     };
 
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
@@ -19,11 +19,13 @@ jQuery(document).ready(function($) {
         lang = $('body').attr('lang'),
         monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    // var ghostAPI = new GhostContentAPI({
-    //     host: config['content-api-host'],
-    //     key: config['content-api-key'],
-    //     version: 'v2'
-    // });
+    if (config['content-api-key']) {
+        var ghostAPI = new GhostContentAPI({
+            host: config['content-api-host'],
+            key: config['content-api-key'],
+            version: 'v2'
+        });
+    }
 
     // Featured posts slider
 
@@ -112,10 +114,13 @@ jQuery(document).ready(function($) {
     // Search trigger
     $('.search-trigger').on('click', function(event) {
         event.preventDefault();
-        setTimeout(function() {
-            $('.search #search-field').focus();
-        }, 300);
+        $('body').focus();
         $('body').toggleClass('search-visible');
+        if ($('body').hasClass('search-visible')) {
+            setTimeout(function () {
+                $('.search #search-field').focus();
+            }, 300);
+        }
     });
 
     var ghostSearch = new GhostSearch({

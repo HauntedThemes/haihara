@@ -38,8 +38,18 @@
                                 {{#if @site.twitter}}
                                     <a href="{{twitter_url}}" class="twitter" title="{{@site.twitter}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
                                 {{/if}}
-                                <a href="https://www.youtube.com/" class="youtube" title="{{@site.title}} - {{t "YouTube"}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
-                                <a href="https://www.instagram.com/" class="instagram" title="{{@site.title}} - {{t "Instagram"}}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                                {{#if @custom.linkedin}}
+                                <a href="{{ @custom.linkedin }}" class="instagram" title="{{@site.title}} - {{t " Linkedin"}}"
+                                    target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                                {{/if}}
+                                {{#if @custom.youtube}}
+                                <a href="{{ @custom.youtube }}" class="youtube" title="{{@site.title}} - {{t " YouTube"}}" target="_blank"
+                                    rel="noopener noreferrer"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                                {{/if}}
+                                {{#if @custom.instagram}}
+                                <a href="{{ @custom.instagram }}" class="instagram" title="{{@site.title}} - {{t " Instagram"}}" target="_blank"
+                                    rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                                {{/if}}
                                 <a href="{{@site.url}}/rss" title="{{@site.title}} - {{t "RSS Feed"}}"><i class="fa fa-rss" aria-hidden="true"></i></a>
                             </div>
                         </div>
