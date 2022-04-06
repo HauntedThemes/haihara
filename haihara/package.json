@@ -2,7 +2,7 @@
     "name": "haihara",
     "description": "If you are a busy publisher we are pleased to inform that this theme is a little monster that feeds on content for lunch, supper and dinner. You have been warned...",
     "demo": "https://haihara.hauntedthemes.com/",
-    "version": "2.0.1",
+    "version": "2.1.0",
     "license": "GNU General Public License, Version 2",
     "engines": {
         "ghost": ">=2.0.0",
@@ -39,6 +39,56 @@
             },
             "l": {
                 "width": 1110
+            }
+        },
+        "custom": {
+            "primary": {
+                "type": "color",
+                "default": "#0025C8"
+            },
+            "secondary": {
+                "type": "color",
+                "default": "#f0f0f0"
+            },
+            "accent": {
+                "type": "color",
+                "default": "#FB0007"
+            },
+            "primary_font": {
+                "type": "text",
+                "default": "\"sofia-pro\", \"Roboto\", sans-serif"
+            },
+            "secondary_font": {
+                "type": "text",
+                "default": "\"ropa-soft-pro\", \"Roboto Condensed\", sans-serif"
+            },
+            "tertiary_font": {
+                "type": "text",
+                "default": "\"dienstag\", \"Montserrat\", sans-serif"
+            },
+            "api_host": {
+                "type": "text",
+                "default": ""
+            },
+            "api_key": {
+                "type": "text",
+                "default": ""
+            },
+            "advertise": {
+                "type": "boolean",
+                "default": true
+            },
+            "instagram": {
+                "type": "text",
+                "default": ""
+            },
+            "linkedin": {
+                "type": "text",
+                "default": ""
+            },
+            "youtube": {
+                "type": "text",
+                "default": ""
             }
         }
     }

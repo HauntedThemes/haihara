@@ -70,8 +70,10 @@
             </ul>
         {{/get}}
     </div>
+    {{#if @custom.advertise}}
     <div class="widget ads">
         <h3>{{t "Advertisement"}}</h3>
         <div class="ads-container">{{t "Your ad here"}}</div>
     </div>
+    {{/if}}
 </div>

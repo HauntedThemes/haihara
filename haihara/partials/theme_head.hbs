@@ -16,6 +16,28 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
     <link rel="stylesheet" type="text/css" href="{{asset "css/libraries.css"}}" />
     <link rel="stylesheet" type="text/css" href="{{asset "css/style.css"}}" />
+    <style>
+        :root {
+            {{#if @custom.primary}}
+            --primary: {{@custom.primary}};
+            {{/if}}
+            {{#if @custom.secondary}}
+            --secondary: {{@custom.secondary}};
+            {{/if}}
+            {{#if @custom.accent}}
+            --accent: {{@custom.accent}};
+            {{/if}}
+            {{#if @custom.primary_font}}
+            --primary-font-family: {{{@custom.primary_font}}};
+            {{/if}}
+            {{#if @custom.secondary_font}}
+            --secondary-font-family: {{{@custom.secondary_font}}};
+            {{/if}}
+            {{#if @custom.tertiary_font}}
+            --tertiary-font-family: {{{@custom.tertiary_font}}};
+            {{/if}}
+        }
+    </style>
 
     {{!-- Google Fonts embed code --}}
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto+Condensed:400,700%7CRoboto:400,700" rel="stylesheet">
